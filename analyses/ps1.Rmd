@@ -21,7 +21,15 @@ I pretty much always clear the workspace and load the same basic helper function
 
 ```{r prelims}
 rm(list=ls())
-source("../helper/useful.R")
+#load libraries for data manipulation and graphing
+library(ggplot2)
+library(plyr)
+library(lme4)
+library(lmerTest)
+
+#some useful functions for computing measurement error
+sem <- function(x) {sd(x)/sqrt(length(x))}
+ci95 <- function(x) {3.96*sem(x)}
 ```
 
 Note that I'm using a "relative" path (the "../helper") rather than an absolute path (e.g. "/Users/mcfrank/code/projects/etc..."). The relative path means that someone else can run your code by changing to the right directory, while the absolute path will force someone else to make trivial changes every time they want to run it.
