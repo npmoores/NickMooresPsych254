@@ -44,10 +44,60 @@ ci.low <- function(x,na.rm=T) {
 ci.high <- function(x,na.rm=T) {
   quantile(bootstrap(1:length(x),1000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - mean(x,na.rm=na.rm)}
 
+## sample a number of rows from a data frame according to a PRNG seed
+scoop <- function(df, seed = 0, n = 5) {
+  set.seed(seed)
+  df[sample(nrow(df), n), ]
+}
+
 ## get stars for significance testing
 getstars <- function(x) {
   if (x > .1) {return("")}
   if (x < .001) {return("***")}
   if (x < .01) {return("**")}
   if (x < .05) {return("*")}
+}
+
+round1 <- function(x) {
+    round(x,1)
+}
+
+round2 <- function(x) {
+    round(x,2)
+}
+
+round3 <- function(x) {
+    round(x,3)
+}
+
+round4 <- function(x) {
+    round(x,4)
+}
+
+round5 <- function(x) {
+    round(x,5)
+}
+
+round6 <- function(x) {
+    round(x,6)
+}
+
+round7 <- function(x) {
+    round(x,7)
+}
+
+str1 <- function(x) {
+    str(x,1)
+}
+
+str2 <- function(x) {
+    str(x,2)
+}
+
+str3 <- function(x) {
+    str(x,3)
+}
+
+str4 <- function(x) {
+    str(x,4)
 }
