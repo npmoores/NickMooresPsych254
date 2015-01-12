@@ -5,14 +5,19 @@ date: "January 11, 2015"
 output: html_document
 ---
 
-This is problem set #1, in which we hope you will practice the packages tidyr and dplyr. There are some great cheat sheets available here:
+This is problem set #1, in which we hope you will practice the packages tidyr and dplyr. There are some great cheat sheets from [RStudio](http://www.rstudio.com/resources/cheatsheets/).
 
-http://www.rstudio.com/resources/cheatsheets/?mkt_tok=3RkMMJWWfF9wsRonuKzAZKXonjHpfsX56ugpXKazlMI%2F0ER3fOvrPUfGjI4ASMpkI%2BSLDwEYGJlv6SgFTbDMMa541LgKWxc%3D
+The data set
+------------
+
+This data set comes from a replication of [Janiszewski and Uy (2008)](http://dx.doi.org/10.1111/j.1467-9280.2008.02057.x), who investigated whether the precision of the anchor for a price influences the amount of adjustment.
+
+In the data frame, the `Input.condition` variable represents the experimental condition (under the rounded anchor, the rounded anchor, over the rounded anchor). `Input.price1`, `Input.price2`, and `Input.price3` are the anchors for the `Answer.dog_cost`, `Answer.plasma_cost`, and `Answer.sushi_cost` items.
 
 Preliminaries
 -------------
 
-I pretty much always clear the workspace and load the same basic helper functions before starting an analysis. 
+I pretty much always clear the workspace and load the same basic helper functions before starting an analysis.
 
 ```{r prelims}
 rm(list=ls())
@@ -24,50 +29,52 @@ Note that I'm using a "relative" path (the "../helper") rather than an absolute 
 Part 1: Data cleaning
 ---------------------
 
-The first part of this exercise actually just consists of getting the data to load appropriately. This is not trivial. Let's try it:
+The first part of this exercise actually just consists of getting the data in a format usable for analysis. This is not trivial. Let's try it:
 
 ```{r data1}
 d <- read.csv("../data/janiszewski_rep_exercise.csv")
 ```
 
-Fine, right? Why can't we go forward with the analysis? 
+Fine, right? Why can't we go forward with the analysis?
 
-```{r summarise}
-summary(d)
-```
+HINT: try computing some summary statistics for the different items. Also, are there any participants that did the task more than once?
 
-What's wrong with this picture? Fix it so that it looks reasonable. 
+Fix the data file so that it looks reasonable.
+
+
 
 Part 2: Making these data tidy
 ------------------------------
 
-Now let's start with the cleaned data, so that we are all beginning from the same place. 
+Now let's start with the cleaned data, so that we are all beginning from the same place.
 
 ```{r data2}
 d <- read.csv("../data/janiszewski_rep_cleaned.csv")
 ```
 
-This data frame is in *wide* format - that means that each row is a participant and there are multiple observations per participant. This data is not *tidy*. 
+This data frame is in *wide* format - that means that each row is a participant and there are multiple observations per participant. This data is not *tidy*.
 
-To make this data tidy, we'll do some cleanup. First, remove the columns you don't need, using the verb *select*.
+To make this data tidy, we'll do some cleanup. First, remove the columns you don't need, using the verb `select`.
 
-HINT: ?select and the examples of helper functions will help you be efficient.
+HINT: `?select` and the examples of helper functions will help you be efficient.
 
 ```{r select}
 d.tidy <- select(...)
 ```
 
-Try renaming some variables using *rename*. A good naming scheme is:
+
+Try renaming some variables using `rename`. A good naming scheme is:
 
 * consistent with case
 * consistent with "." or "_" ( "_" is usually preferred)
 * concise as will be comprehensible to others
 
-Try using the %>% operator as well. So you will be "piping" d %>% rename(...).
+Try using the `%>%` operator as well. So you will be "piping" `d %>% rename(...)`.
 
 ```{r rename}
 d.tidy <- ...
-```         
+```
+
 
 OK, now for the tricky part. Use the verb *gather* to turn this into a *tidy* data frame.
 
@@ -77,12 +84,21 @@ HINT: look for online examples!
 d.tidy <- ...
 ```
 
-Bonus problem: *spread* these data back into a wide format data frame. 
+
+Bonus problem: *spread* these data back into a wide format data frame.
 
 ```{r spread}
 d.wide <- ...
 ```
 
+
 Part 3: Manipulating the data using dplyr
 -----------------------------------------
+
+Try also using the dplyr `distinct` function to remove the duplicate participants from the raw csv file that you discovered in part 1.
+
+```{r}
+d.raw <- read.csv("../data/janiszewski_rep_exercise.csv")
+d.unique.subs <- ...
+```
 
