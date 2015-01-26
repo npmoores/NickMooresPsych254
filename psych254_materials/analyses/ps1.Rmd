@@ -1,3 +1,7 @@
+
+Nicholas Moores' PS1 for Psych 254
+----------------------------------
+
 ---
 title: 'Nick Moores Psych 254 PS1'
 author: "Nicholas Moores"
