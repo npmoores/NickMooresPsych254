@@ -1,6 +1,6 @@
 ---
-title: 'Nick Moores Psych 254 W15 PS #1'
-author: "Nicholas Moores" (assignment created by Michael Frank)
+title: 'Nick Moores Psych 254 PS1'
+author: "Nicholas Moores"
 date: "January 11, 2015"
 output: html_document
 ---
