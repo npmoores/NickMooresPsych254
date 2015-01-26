@@ -1,11 +1,9 @@
 ---
-title: 'Psych 254 W15 PS #1'
-author: "Mike Frank"
+title: 'Nick Moores Psych 254 W15 PS #1'
+author: "Nicholas Moores" (assignment created by Michael Frank)
 date: "January 11, 2015"
 output: html_document
 ---
-
-This is problem set #1, in which we hope you will practice the packages tidyr and dplyr. There are some great cheat sheets from [RStudio](http://www.rstudio.com/resources/cheatsheets/).
 
 The data set
 ------------
@@ -41,19 +39,49 @@ Part 1: Data cleaning
 
 The first part of this exercise actually just consists of getting the data in a format usable for analysis. This is not trivial. Let's try it:
 
-```{r data1}
-d <- read.csv("~/Documents/College/Senior Year/Winter Quarter/Psych 254 repos/Assignment 1/psych254_materials/data/janiszewski_rep_exercise.csv")
-head(d)
-str(d)
-summary(d)
+### Get the data in a format usable for analysis
+
+```{r data_read}
+d <- read.csv("../data/janiszewski_rep_exercise.csv")
+d <- tbl_df(d)
+glimpse(d)
+mean(d$Answer.sushi_cost) #will give an error! need to convert to a different data type
+mean(d$Input.price2) #will give an error! need to convert to a different data type
 ```
 
-Fine, right? Why can't we go forward with the analysis?
+In looking at the data, we see that we can't go forward with the analysis because some participants are duplicates (some participants did the task more than once). In addition, many of the columns which we'd like to perform summary statistics over, including the various `answer` columns and the `input price` columns, are stored as factors, not as integers or numerics.
 
-HINT: try computing some summary statistics for the different items. Also, are there any participants that did the task more than once?
+### Fix the data file so that it looks reasonable.
 
-Fix the data file so that it looks reasonable.
+In order to do this, I remove any commas from the columns with integer or double values, and cast them as integers or doubles where appropriate.
+```{r data_clean}
+#clean the numeric columns
+d$Input.price1 <- sub(",","",d$Input.price1)
+d$Input.price1 <- as.integer(d$Input.price1)
+d$Input.price2 <- sub(",","",d$Input.price2)
+d$Input.price2 <- as.integer(d$Input.price2)
+d$Input.price3 <- sub(",","",d$Input.price3)
+d$Input.price3 <- as.double(d$Input.price3)
+d$Answer.dog_cost <- sub(",","",d$Answer.dog_cost)
+d$Answer.dog_cost <- as.double(d$Answer.dog_cost)
+d$Answer.plasma_cost <- sub(",","",d$Answer.plasma_cost)
+d$Answer.plasma_cost <- as.double(d$Answer.plasma_cost)
+d$Answer.sushi_cost <- sub(",","",d$Answer.sushi_cost)
+d$Answer.sushi_cost <- as.double(d$Answer.sushi_cost)
 
+#examine the data again
+glimpse(d)
+#calculate example summary statistics
+mean_stats <- aggregate(Answer.dog_cost ~ Input.price1 + Input.price2 + Input.price3, d, mean)
+sd_stats <- aggregate(Answer.dog_cost ~ Input.price1 + Input.price2 + Input.price3, d, sd)
+sem_stats <- aggregate(Answer.dog_cost ~ Input.price1 + Input.price2 + Input.price3, d, sem)
+mean_stats
+sd_stats
+sem_stats
+
+#remove the duplicate turkers
+d <- subset(d,!duplicated(d$WorkerId))
+```
 
 
 Part 2: Making these data tidy
@@ -63,45 +91,44 @@ Now let's start with the cleaned data, so that we are all beginning from the sam
 
 ```{r data2}
 d <- read.csv("../data/janiszewski_rep_cleaned.csv")
+glimpse(d)
 ```
 
 This data frame is in *wide* format - that means that each row is a participant and there are multiple observations per participant. This data is not *tidy*.
 
 To make this data tidy, we'll do some cleanup. First, remove the columns you don't need, using the verb `select`.
 
-HINT: `?select` and the examples of helper functions will help you be efficient.
-
+### Remove the columns you don't need
 ```{r select}
-d.tidy <- select(...)
+d.tidy <- d
+d.tidy <- select(d, one_of(c("HITId","HITTypeId","Reward","AssignmentId","WorkerId","WorkTimeInSeconds","Input.condition","Input.price1","Input.price2","Input.price3","Answer.dog_cost","Answer.plasma_cost","Answer.sushi_cost")))
+glimpse(d.tidy)
 ```
 
 
-Try renaming some variables using `rename`. A good naming scheme is:
+I now rename some of the column variables using `rename`, attempting to utilize a naming scheme that is consistent with case, consistent with "." or "_" ( "_" is usually preferred), and concise as will be comprehensible to others.
 
-* consistent with case
-* consistent with "." or "_" ( "_" is usually preferred)
-* concise as will be comprehensible to others
-
-Try using the `%>%` operator as well. So you will be "piping" `d %>% rename(...)`.
+Where possible, I use the `%>%` operator to pipe the `d.tidy` as an argument to subsequent `tidyr` function calls.
 
 ```{r rename}
-d.tidy <- ...
+d.tidy <- d.tidy %>% rename(hit_ID = HITId, hit_type_ID = HITTypeId, assignment_ID = AssignmentId, worker_ID = WorkerId) %>% rename(worker_time = WorkTimeInSeconds, reward = Reward, input_condition = Input.condition, input_price1 = Input.price1, input_price2 = Input.price2, input_price3 = Input.price3, answer_dog = Answer.dog_cost, answer_plasma = Answer.plasma_cost, answer_sushi = Answer.sushi_cost)
+glimpse(d.tidy)
 ```
 
+I now use the `tidyr` *gather* function to turn the dataframe into a *tidy* data frame in long form, collapsing the `input price` and `answer` columns so that each answer gets its own row, instead of each subject in the MTurk study getting their own row.
 
-OK, now for the tricky part. Use the verb *gather* to turn this into a *tidy* data frame.
-
-HINT: look for online examples!
-
+### Convert the data to long format
 ```{r gather}
-d.tidy <- ...
+d.tidy <- d.tidy %>% gather("input_price_type", "input_price_amount", input_price1:input_price3, na.rm=TRUE) %>% gather("answer_type", "answer_amount", answer_dog:answer_plasma, na.rm=TRUE)
+glimpse(d.tidy)
 ```
 
+I now use the `tidyr` *spread* function to demonstrate how one can convert a dataframe in long format to one in wide format again.
 
-Bonus problem: *spread* these data back into a wide format data frame.
-
+### Convert the data back to wide format
 ```{r spread}
-d.wide <- ...
+d.wide <- d.tidy %>% spread("input_price_type","input_price_amount") %>% spread("answer_type","answer_amount")
+glimpse(d.wide)
 ```
 
 
@@ -112,7 +139,11 @@ Try also using the dplyr `distinct` function to remove the duplicate participant
 
 ```{r}
 d.raw <- read.csv("../data/janiszewski_rep_exercise.csv")
-d.unique.subs <- ...
+d.raw <- tbl_df(d.raw)
+d.raw <- d.raw %>% rename(worker_ID = WorkerId)
+d.unique.subs <- distinct(d.raw, worker_ID)
+nrow(d.raw)
+nrow(d.unique.subs)
 ```
 
 
