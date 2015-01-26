@@ -1,13 +1,9 @@
 
-Nicholas Moores' PS1 for Psych 254
+Nicholas Moores PS1 for Psych 254
 ----------------------------------
 
----
-title: 'Nick Moores Psych 254 PS1'
-author: "Nicholas Moores"
-date: "January 11, 2015"
-output: html_document
----
+January 25, 2015
+----------------
 
 The data set
 ------------
