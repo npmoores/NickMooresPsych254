@@ -1,0 +1,349 @@
+# act-pass2 1 active_v1
+The man held the woman.
+? Did the woman hold something/someone? No
+# act-pass2 1 active_v2
+The woman held the man.
+? Did the woman hold something/someone? Yes
+# act-pass2 1 passive_v2
+The man was held by the woman.
+? Did the woman hold something/someone? Yes
+# act-pass2 1 passive_v1
+The woman was held by the man.
+? Did the woman hold something/someone? No
+
+# act-pass2 2 active_v1
+The airplane destroyed the missile.
+? Did the missile destroy something/someone? No
+# act-pass2 2 active_v2
+The missile destroyed the airplane.
+? Did the missile destroy something/someone? Yes
+# act-pass2 2 passive_v2
+The airplane was destroyed by the missile.
+? Did the missile destroy something/someone? Yes
+# act-pass2 2 passive_v1
+The missile was destroyed by the airplane.
+? Did the missile destroy something/someone? No
+
+# act-pass2 3 active_v1
+The father chased the son.
+? Did the son chase something/someone? No
+# act-pass2 3 active_v2
+The son chased the father.
+? Did the son chase something/someone? Yes
+# act-pass2 3 passive_v2
+The father was chased by the son.
+? Did the son chase something/someone? Yes
+# act-pass2 3 passive_v1
+The son was chased by the father.
+? Did the son chase something/someone? No
+
+# act-pass2 4 active_v1
+The nephew tickled the uncle.
+? Did the nephew tickle something/someone? Yes
+# act-pass2 4 active_v2
+The uncle tickled the nephew.
+? Did the nephew tickle something/someone? No
+# act-pass2 4 passive_v2
+The nephew was tickled by the uncle.
+? Did the nephew tickle something/someone? No
+# act-pass2 4 passive_v1
+The uncle was tickled by the nephew.
+? Did the nephew tickle something/someone? Yes
+
+# act-pass2 5 active_v1
+The woman nudged the man.
+? Did the woman nudge something/someone? Yes
+# act-pass2 5 active_v2
+The man nudged the woman.
+? Did the woman nudge something/someone? No
+# act-pass2 5 passive_v2
+The woman was nudged by the man.
+? Did the woman nudge something/someone? No
+# act-pass2 5 passive_v1
+The man was nudged by the woman.
+? Did the woman nudge something/someone? Yes
+
+# act-pass2 6 active_v1
+The daughter bit the son.
+? Did the daughter bite something/someone? Yes
+# act-pass2 6 active_v2
+The son bit the daughter.
+? Did the daughter bite something/someone? No
+# act-pass2 6 passive_v2
+The daughter was bitten by the son.
+? Did the daughter bite something/someone? No
+# act-pass2 6 passive_v1
+The son was bitten by the daughter.
+? Did the daughter bite something/someone? Yes
+
+# act-pass2 7 active_v1
+The husband called the wife.
+? Did the husband call something/someone? Yes
+# act-pass2 7 active_v2
+The wife called the husband.
+? Did the husband call something/someone? No
+# act-pass2 7 passive_v2
+The husband was called by the wife.
+? Did the husband call something/someone? No
+# act-pass2 7 passive_v1
+The wife was called by the husband.
+? Did the husband call something/someone? Yes
+
+# act-pass2 8 active_v1
+The girl pushed the boy.
+? Did the girl push something/someone? Yes
+# act-pass2 8 active_v2
+The boy pushed the girl.
+? Did the girl push something/someone? No
+# act-pass2 8 passive_v2
+The girl was pushed by the boy.
+? Did the girl push something/someone? No
+# act-pass2 8 passive_v1
+The boy was pushed by the girl.
+? Did the girl push something/someone? Yes
+
+# act-pass2 9 active_v1
+The wife ignored the husband.
+? Did the wife ignore something/someone? Yes
+# act-pass2 9 active_v2
+The husband ignored the wife.
+? Did the wife ignore something/someone? No
+# act-pass2 9 passive_v2
+The wife was ignored by the husband.
+? Did the wife ignore something/someone? No
+# act-pass2 9 passive_v1
+The husband was ignored by the wife.
+? Did the wife ignore something/someone? Yes
+
+# act-pass2 10 active_v1
+The niece followed the aunt.
+? Did the aunt follow something/someone? No
+# act-pass2 10 active_v2
+The aunt followed the niece.
+? Did the aunt follow something/someone? Yes
+# act-pass2 10 passive_v2
+The niece was followed by the aunt.
+? Did the aunt follow something/someone? Yes
+# act-pass2 10 passive_v1
+The aunt was followed by the niece.
+? Did the aunt follow something/someone? No
+
+# act-pass2 11 active_v1
+The professor criticized the TA.
+? Did the TA criticize something/someone? No
+# act-pass2 11 active_v2
+The TA criticized the professor.
+? Did the TA criticize something/someone? Yes
+# act-pass2 11 passive_v2
+The professor was criticized by the TA.
+? Did the TA criticize something/someone? Yes
+# act-pass2 11 passive_v1
+The TA was criticized by the professor.
+? Did the TA criticize something/someone? No
+
+# act-pass2 12 active_v1
+The lawyer insulted the judge.
+? Did the judge insult something/someone? No
+# act-pass2 12 active_v2
+The judge insulted the lawyer.
+? Did the judge insult something/someone? Yes
+# act-pass2 12 passive_v2
+The lawyer was insulted by the judge.
+? Did the judge insult something/someone? Yes
+# act-pass2 12 passive_v1
+The judge was insulted by the lawyer.
+? Did the judge insult something/someone? No
+
+# filler 1 filler
+The professor conducted an inquiry into the status of the file.
+? Did the professor conduct someone/something? Yes
+
+# filler 2 filler
+The commissioner wrote a report for the chairman.
+? Did the commissioner write someone/something? Yes
+
+# filler 3 filler
+The terrorist assassinated the newsman in cold blood.
+? Did the terrorist kill someone/something? Yes
+
+# filler 4 filler
+A legislator lied to the consultant about a new bill.
+? Did the legislator lie about someone/something? Yes
+
+# filler 5 filler
+The toddler hugged a teddybear because he was scared.
+? Did the toddler hug someone/something? Yes
+
+# filler 6 filler
+The spy monitored a baroness for several months.
+? Did the spy watch someone/something? Yes
+
+# filler 7 filler
+The witch was hanged by an executioner promptly at dawn.
+? Did the executioner hang someone/something? Yes
+
+# filler 8 filler
+The pianist met with a beautician to prepare for her recital.
+? Did the pianist meet with someone/something? Yes
+
+# filler 9 filler
+A socialite was greeted by the butler with a plate of caviar.
+? Did the butler greet someone/something? Yes
+
+# filler 10 filler
+The pirate stole the booty from an officer.
+? Did the pirate steal someone/something? Yes
+
+# filler 11 filler
+The colonel was knighted by the queen because of his loyalty.
+? Did the queen knight someone/something? Yes
+
+# filler 12 filler
+The spokesman toasted a muffin for the agent after the early morning appointment.
+? Did the spokesman do something for someone/something? Yes
+
+# filler 13 filler
+The supplier described a scenario for the class after explaining basic concepts.
+? Did the supplier explain someone/something? Yes
+
+# filler 14 filler
+A bystander was rescued by the fireman in the nick of time.
+? Did the fireman rescue someone/something? Yes
+
+# filler 15 filler
+The defendant misled a juryman when she said that she worked for the government.
+? Was the juryman misled by someone/something? Yes
+
+# filler 16 filler
+The translator found a car for the ambassador because he could not speak Lebanese.
+? Was a car found for someone/something? Yes
+
+# filler 17 filler
+The acrobat respected the ballerina because she went to Juilliard.
+? Was the ballerina respected by someone/something? Yes
+
+# filler 18 filler
+The principal commended a parent for her ability to motivate her child.
+? Was the parent commended by someone/something? Yes
+
+# filler 19 filler
+The robot killed a scientist before escaping from the laboratory.
+? Did the robot escape from someone/something? Yes
+
+# filler 20 filler
+The preacher irritated a parishioner because she was used to shorter sermons.
+? Was the parishioner irritated by someone/something? Yes
+
+# filler 21 filler
+The presenter was criticized by a legislator because of his speech impediment.
+? Did the legislator criticize someone/something? Yes
+
+# filler 22 filler
+An analyst angered the economist after he interrupted a phone conference five times.
+? Was the economist angered by someone/something? Yes
+
+# filler 23 filler
+The advisee opened a file for the visitor with some trepidation.
+? Was the file opened by someone/something? Yes
+
+# filler 24 filler
+The choreographer found a film starring the lead in the musical.
+? Was the film found by someone/something? Yes
+
+# filler 25 filler
+The playwright selected the understudy because of his resemblance to the lead actor.
+? Did the understudy receive someone/something? No
+
+# filler 26 filler
+The insurer paid the victim because his car had been destroyed.
+? Did the victim pay someone/something? No
+
+# filler 27 filler
+The runner filled a bottle with cold tap water.
+? Did the runner receive someone/something? No
+
+# filler 28 filler
+The sculptor brought a shell from the ocean floor.
+? Did the shell receive someone/something? No
+
+# filler 29 filler
+The dealer shuffled the deck before distributing the cards.
+? Did the cards receive someone/something? No
+
+# filler 30 filler
+The trainer filled a bag with ice for the injured client.
+? Did the trainer receive someone/something? No
+
+# filler 31 filler
+The cameraman was paid to follow a bridesmaid down the aisle with his camera.
+? Did the cameraman volunteer to film someone/something? No
+
+# filler 32 filler
+The rioter stapled the sign to a bulletin board in the corridor.
+? Did the rioter receive someone/something? No
+
+# filler 33 filler
+The paramedic helped an invalid into the brick building 
+? Did the paramedic receive someone/something? No
+
+# filler 34 filler
+The trucker ordered a bartender to bring him a beer.
+? Did the bartender receive someone/something? No
+
+# filler 35 filler
+The performer lifted the acrobat onto her shoulders gracefully.
+? Did the acrobat receive someone/something? No
+
+# filler 36 filler
+The archivist found a document dating back to the Nixon administration.
+? Did the archivist receive someone/something? No
+
+# filler 37 filler
+The intern begged a programmer to edit the program because it was due the next day.
+? Did the intern receive someone/something? No
+
+# filler 38 filler
+The surgeon called for a nurse to assist him with the operation.
+? Did the nurse receive someone/something? No
+
+# filler 39 filler
+The beekeeper selected a honeycomb carefully from a hive of swarming bees.
+? Did the beekeeper eat someone/something? No
+
+# filler 40 filler
+The Vikings raided a village in search of the warrior.
+? Did the warrior receive someone/something? No
+
+# filler 41 filler
+The jewelry-maker was commissioned by the millionaire.
+? Did the millionaire receive someone/something? No
+
+# filler 42 filler
+The cheerleader was treated by a doctor who had been watching the game.
+? Did the cheerleader call someone/something? No
+
+# filler 43 filler
+The alum was offended by the solicitor because he asked very personal questions.
+? Did the alum receive someone/something? No
+
+# filler 44 filler
+The astronaut accepted the mission.
+? Did the astronaut receive someone/something? No
+
+# filler 45 filler
+The assistant xeroxed a file for the editor after sorting some papers.
+? Did the assistant receive someone/something? No
+
+# filler 46 filler
+The coach encouraged the team to score in the last quarter.
+? Did the coach receive someone/something? No
+
+# filler 47 filler
+The butcher cleaned a knife before he sliced the ham.
+? Did the butcher receive someone/something? No
+
+# filler 48 filler
+The sergeant assigned a locker to the private after the meeting.
+? Did the sergeant receive someone/something? No
+
+

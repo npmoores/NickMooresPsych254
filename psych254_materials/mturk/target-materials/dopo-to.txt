@@ -1,0 +1,261 @@
+
+# dopo 1 DO_plausible
+The sister mailed the niece the letter.
+? Did the niece receive something/someone? Yes
+# dopo 1 DO_implausible
+The sister mailed the letter the niece.
+? Did the niece receive something/someone? No
+# dopo 1 PO_plausible
+The sister mailed the letter to the niece.
+? Did the niece receive something/someone? Yes
+# dopo 1 PO_implausible
+The sister mailed the niece to the letter.
+? Did the niece receive something/someone? No
+
+# dopo 2 DO_plausible
+The mother gave the daughter the candle.
+? Did the daughter receive something/someone? Yes
+# dopo 2 DO_implausible
+The mother gave the candle the daughter.
+? Did the daughter receive something/someone? No
+# dopo 2 PO_plausible
+The mother gave the candle to the daughter.
+? Did the daughter receive something/someone? Yes
+# dopo 2 PO_implausible
+The mother gave the daughter to the candle.
+? Did the daughter receive something/someone? No
+
+# dopo 3 DO_plausible
+The uncle sold the father the truck.
+? Did the father receive something/someone? Yes
+# dopo 3 DO_implausible
+The uncle sold the truck the father.
+? Did the father receive something/someone? No
+# dopo 3 PO_plausible
+The uncle sold the truck to the father.
+? Did the father receive something/someone? Yes
+# dopo 3 PO_implausible
+The uncle sold the father to the truck.
+? Did the father receive something/someone? No
+
+# dopo 4 DO_plausible
+The contractor lent the homeowner the saw.
+? Did the homeowner receive something/someone? Yes
+# dopo 4 DO_implausible
+The contractor lent the saw the homeowner.
+? Did the homeowner receive something/someone? No
+# dopo 4 PO_plausible
+The contractor lent the saw to the homeowner.
+? Did the homeowner receive something/someone? Yes
+# dopo 4 PO_implausible
+The contractor lent the homeowner to the saw.
+? Did the homeowner receive something/someone? No
+
+# dopo 5 DO_plausible
+The sailing club leased the man the boat.
+? Did the man receive something/someone? Yes
+# dopo 5 DO_implausible
+The sailing club leased the boat the man.
+? Did the man receive something/someone? No
+# dopo 5 PO_plausible
+The sailing club leased the boat to the man.
+? Did the man receive something/someone? Yes
+# dopo 5 PO_implausible
+The sailing club leased the man to the boat.
+? Did the man receive something/someone? No
+
+# dopo 6 DO_plausible
+The girl tossed the boy the apple.
+? Did the apple receive something/someone? No
+# dopo 6 DO_implausible
+The girl tossed the apple the boy.
+? Did the apple receive something/someone? Yes
+# dopo 6 PO_plausible
+The girl tossed the apple to the boy.
+? Did the apple receive something/someone? No
+# dopo 6 PO_implausible
+The girl tossed the boy to the apple.
+? Did the apple receive something/someone? Yes
+
+# dopo 7 DO_plausible
+The daughter passed the mother the bowl.
+? Did the bowl receive something/someone? No
+# dopo 7 DO_implausible
+The daughter passed the bowl the mother.
+? Did the bowl receive something/someone? Yes
+# dopo 7 PO_plausible
+The daughter passed the bowl to the mother.
+? Did the bowl receive something/someone? No
+# dopo 7 PO_implausible
+The daughter passed the mother to the bowl.
+? Did the bowl receive something/someone? Yes
+
+# dopo 8 DO_plausible
+The scuba instructor rented the tourist the equipment.
+? Did the equipment receive something/someone? No
+# dopo 8 DO_implausible
+The scuba instructor rented the equipment the tourist.
+? Did the equipment receive something/someone? Yes
+# dopo 8 PO_plausible
+The scuba instructor rented the equipment to the tourist.
+? Did the equipment receive something/someone? No
+# dopo 8 PO_implausible
+The scuba instructor rented the tourist to the equipment.
+? Did the equipment receive something/someone? Yes
+
+# dopo 9 DO_plausible
+The boy handed the girl the pencil.
+? Did the pencil receive something/someone? No
+# dopo 9 DO_implausible
+The boy handed the pencil the girl.
+? Did the pencil receive something/someone? Yes
+# dopo 9 PO_plausible
+The boy handed the pencil to the girl.
+? Did the pencil receive something/someone? No
+# dopo 9 PO_implausible
+The boy handed the girl to the pencil.
+? Did the pencil receive something/someone? Yes
+
+# dopo 10 DO_plausible
+The nanny threw the child the toy.
+? Did the toy receive something/someone? No
+# dopo 10 DO_implausible
+The nanny threw the toy the child.
+? Did the toy receive something/someone? Yes
+# dopo 10 PO_plausible
+The nanny threw the toy to the child.
+? Did the toy receive something/someone? No
+# dopo 10 PO_implausible
+The nanny threw the child to the toy.
+? Did the toy receive something/someone? Yes
+
+# dopo 11 DO_plausible
+The nephew mailed the aunt the postcard.
+? Did the postcard receive something/someone? No
+# dopo 11 DO_implausible
+The nephew mailed the postcard the aunt.
+? Did the postcard receive something/someone? Yes
+# dopo 11 PO_plausible
+The nephew mailed the postcard to the aunt.
+? Did the postcard receive something/someone? No
+# dopo 11 PO_implausible
+The nephew mailed the aunt to the postcard.
+? Did the postcard receive something/someone? Yes
+
+# dopo 12 DO_plausible
+The father gave the son the car.
+? Did the car receive something/someone? No
+# dopo 12 DO_implausible
+The father gave the car the son.
+? Did the car receive something/someone? Yes
+# dopo 12 PO_plausible
+The father gave the car to the son.
+? Did the car receive something/someone? No
+# dopo 12 PO_implausible
+The father gave the son to the car.
+? Did the car receive something/someone? Yes
+
+# dopo 13 DO_plausible
+The shop sold the student the bike.
+? Did the bike receive something/someone? No
+# dopo 13 DO_implausible
+The shop sold the bike the student.
+? Did the bike receive something/someone? Yes
+# dopo 13 PO_plausible
+The shop sold the bike to the student.
+? Did the bike receive something/someone? No
+# dopo 13 PO_implausible
+The shop sold the student to the bike.
+? Did the bike receive something/someone? Yes
+
+# dopo 14 DO_plausible
+The janitor lent the teacher the mop.
+? Did the mop receive something/someone? No
+# dopo 14 DO_implausible
+The janitor lent the mop the teacher.
+? Did the mop receive something/someone? Yes
+# dopo 14 PO_plausible
+The janitor lent the mop to the teacher.
+? Did the mop receive something/someone? No
+# dopo 14 PO_implausible
+The janitor lent the teacher to the mop.
+? Did the mop receive something/someone? Yes
+
+# dopo 15 DO_plausible
+The car dealer leased the plumber the SUV.
+? Did the SUV receive something/someone? No
+# dopo 15 DO_implausible
+The car dealer leased the SUV the plumber.
+? Did the SUV receive something/someone? Yes
+# dopo 15 PO_plausible
+The car dealer leased the SUV to the plumber.
+? Did the SUV receive something/someone? No
+# dopo 15 PO_implausible
+The car dealer leased the plumber to the SUV.
+? Did the SUV receive something/someone? Yes
+
+# dopo 16 DO_plausible
+The host tossed the contestant the microphone.
+? Did the contestant receive something/someone? Yes
+# dopo 16 DO_implausible
+The host tossed the microphone the contestant.
+? Did the contestant receive something/someone? No
+# dopo 16 PO_plausible
+The host tossed the microphone to the contestant.
+? Did the contestant receive something/someone? Yes
+# dopo 16 PO_implausible
+The host tossed the contestant to the microphone.
+? Did the contestant receive something/someone? No
+
+# dopo 17 DO_plausible
+The quarterback passed the receiver the ball.
+? Did the receiver receive something/someone? Yes
+# dopo 17 DO_implausible
+The quarterback passed the ball the receiver.
+? Did the receiver receive something/someone? No
+# dopo 17 PO_plausible
+The quarterback passed the ball to the receiver.
+? Did the receiver receive something/someone? Yes
+# dopo 17 PO_implausible
+The quarterback passed the receiver to the ball.
+? Did the receiver receive something/someone? No
+
+# dopo 18 DO_plausible
+The videostore rented the customer the DVD.
+? Did the customer receive something/someone? Yes
+# dopo 18 DO_implausible
+The videostore rented the DVD the customer.
+? Did the customer receive something/someone? No
+# dopo 18 PO_plausible
+The videostore rented the DVD to the customer.
+? Did the customer receive something/someone? Yes
+# dopo 18 PO_implausible
+The videostore rented the customer to the DVD.
+? Did the customer receive something/someone? No
+
+# dopo 19 DO_plausible
+The bartender handed the lady the drink.
+? Did the lady receive something/someone? Yes
+# dopo 19 DO_implausible
+The bartender handed the drink the lady.
+? Did the lady receive something/someone? No
+# dopo 19 PO_plausible
+The bartender handed the drink to the lady.
+? Did the lady receive something/someone? Yes
+# dopo 19 PO_implausible
+The bartender handed the lady to the drink.
+? Did the lady receive something/someone? No
+
+# dopo 20 DO_plausible
+The magician threw the assistant the hat.
+? Did the assistant receive something/someone? Yes
+# dopo 20 DO_implausible
+The magician threw the hat the assistant.
+? Did the assistant receive something/someone? No
+# dopo 20 PO_plausible
+The magician threw the hat to the assistant.
+? Did the assistant receive something/someone? Yes
+# dopo 20 PO_implausible
+The magician threw the assistant to the hat.
+? Did the assistant receive something/someone? No
+

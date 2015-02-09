@@ -1,0 +1,261 @@
+
+# Trans_intrans 1 Transitive_plausible
+The tax law benefited the businessman.
+? Did the tax law benefit from anything? No
+# Trans_intrans 1 Preposition_plausible
+The businessman benefited from the tax law.
+? Did the tax law benefit from anything? No
+# Trans_intrans 1 Transitive_implausible
+The businessman benefited the tax law.
+? Did the tax law benefit from anything? Yes
+# Trans_intrans 1 Preposition_implausible
+The tax law benefited from the businessman.
+? Did the tax law benefit from anything? Yes
+
+# Trans_intrans 2 Transitive_plausible
+The intense practice benefited the player.
+? Did the player benefit from anything? Yes
+# Trans_intrans 2 Preposition_plausible
+The player benefited from the intense practice.
+? Did the player benefit from anything? Yes
+# Trans_intrans 2 Transitive_implausible
+The player benefited the intense practice.
+? Did the player benefit from anything? No
+# Trans_intrans 2 Preposition_implausible
+The intense practice benefited from the player.
+? Did the player benefit from anything? No
+
+# Trans_intrans 3 Transitive_plausible
+The extra time benefited the child with a learning disability.
+? Did the extra time benefit from anything? No
+# Trans_intrans 3 Preposition_plausible
+The child with a learning disability benefited from the extra time.
+? Did the extra time benefit from anything? No
+# Trans_intrans 3 Transitive_implausible
+The child with a learning disability benefited the extra time.
+? Did the extra time benefit from anything? Yes
+# Trans_intrans 3 Preposition_implausible
+The extra time benefited from the child with a learning disability.
+? Did the extra time benefit from anything? Yes
+
+# Trans_intrans 4 Transitive_plausible
+The bribes profited the corrupt politicians.
+? Did the politicians profit from anything? Yes
+# Trans_intrans 4 Preposition_plausible
+The corrupt politicians profited from the bribes.
+? Did the politicians profit from anything? Yes
+# Trans_intrans 4 Transitive_implausible
+The corrupt politicians profited the bribes.
+? Did the politicians profit from anything? No
+# Trans_intrans 4 Preposition_implausible
+The bribes profited from the corrupt politicians.
+? Did the politicians profit from anything? No
+
+# Trans_intrans 5 Transitive_plausible
+The contract profited the business.
+? Did the contract profit from anything? No
+# Trans_intrans 5 Preposition_plausible
+The business profited from the contract.
+? Did the contract profit from anything? No
+# Trans_intrans 5 Transitive_implausible
+The business profited the contract.
+? Did the contract profit from anything? Yes
+# Trans_intrans 5 Preposition_implausible
+The contract profited from the business.
+? Did the contract profit from anything? Yes
+
+# Trans_intrans 6 Transitive_plausible
+The tax reduction profited the millionaire.
+? Did the millionaire profit from anything? Yes
+# Trans_intrans 6 Preposition_plausible
+The millionaire profited from the tax reduction.
+? Did the millionaire profit from anything? Yes
+# Trans_intrans 6 Transitive_implausible
+The millionaire profited the tax reduction.
+? Did the millionaire profit from anything? No
+# Trans_intrans 6 Preposition_implausible
+The tax reduction profited from the millionaire.
+? Did the millionaire profit from anything? No
+
+# Trans_intrans 7 Transitive_plausible
+The new medicine deteriorated the patient's condition.
+? Did the medicine deteriorate from anything? No
+# Trans_intrans 7 Preposition_plausible
+The patient's condition deteriorated from the new medicine.
+? Did the medicine deteriorate from anything? No
+# Trans_intrans 7 Transitive_implausible
+The patient's condition deteriorated the new medicine.
+? Did the medicine deteriorate from anything? Yes
+# Trans_intrans 7 Preposition_implausible
+The new medicine deteriorated from the patient's condition.
+? Did the medicine deteriorate from anything? Yes
+
+# Trans_intrans 8 Transitive_plausible
+The bad lighting deteriorated the woman's eyesight.
+? Did the woman's eyesight deteriorate from anything? Yes
+# Trans_intrans 8 Preposition_plausible
+The woman's eyesight deteriorated from the bad lighting.
+? Did the woman's eyesight deteriorate from anything? Yes
+# Trans_intrans 8 Transitive_implausible
+The woman's eyesight deteriorated the bad lighting.
+? Did the woman's eyesight deteriorate from anything? No
+# Trans_intrans 8 Preposition_implausible
+The bad lighting deteriorated from the woman's eyesight.
+? Did the woman's eyesight deteriorate from anything? No
+
+# Trans_intrans 9 Transitive_plausible
+The long drought deteriorated the soil.
+? Did the drought deteriorate from anything? No
+# Trans_intrans 9 Preposition_plausible
+The soil deteriorated from the long drought.
+? Did the drought deteriorate from anything? No
+# Trans_intrans 9 Transitive_implausible
+The soil deteriorated the long drought.
+? Did the drought deteriorate from anything? Yes
+# Trans_intrans 9 Preposition_implausible
+The long drought deteriorated from the soil.
+? Did the drought deteriorate from anything? Yes
+
+# Trans_intrans 10 Transitive_plausible
+The washing machine shrank the new sweatshirt.
+? Was the sweatshirt shrunken by anything? Yes
+# Trans_intrans 10 Preposition_plausible
+The new sweatshirt shrank inside the washing machine.
+? Was the sweatshirt shrunken by anything? Yes
+# Trans_intrans 10 Transitive_implausible
+The new sweatshirt shrank the washing machine.
+? Was the sweatshirt shrunken by anything? No
+# Trans_intrans 10 Preposition_implausible
+The washing machine shrank inside the new sweatshirt.
+? Was the sweatshirt shrunken by anything? No
+
+# Trans_intrans 11 Transitive_plausible
+The dryer shrank the new cotton t-shirt.
+? Was the dryer shrunken by anything? No
+# Trans_intrans 11 Preposition_plausible
+The new cotton t-shirt shrank inside the dryer.
+? Was the dryer shrunken by anything? No
+# Trans_intrans 11 Transitive_implausible
+The new cotton t-shirt shrank the dryer.
+? Was the dryer shrunken by anything? Yes
+# Trans_intrans 11 Preposition_implausible
+The dryer shrank inside the new cotton t-shirt.
+? Was the dryer shrunken by anything? Yes
+
+# Trans_intrans 12 Transitive_plausible
+The chemotherapy shrank the tumor.
+? Was the tumor shrunken by anything? Yes
+# Trans_intrans 12 Preposition_plausible
+The tumor shrank from the chemotherapy.
+? Was the tumor shrunken by anything? Yes
+# Trans_intrans 12 Transitive_implausible
+The tumor shrank the chemotherapy.
+? Was the tumor shrunken by anything? No
+# Trans_intrans 12 Preposition_implausible
+The chemotherapy shrank from the tumor.
+? Was the tumor shrunken by anything? No
+
+# Trans_intrans 13 Transitive_plausible
+The hot stove melted the plastic handle.
+? Was the hot stove melted by anything? No
+# Trans_intrans 13 Preposition_plausible
+The plastic handled melted from the hot stove.
+? Was the hot stove melted by anything? No
+# Trans_intrans 13 Transitive_implausible
+The plastic handle melted the hot stove.
+? Was the hot stove melted by anything? Yes
+# Trans_intrans 13 Preposition_implausible
+The hot stove melted from the plastic handle.
+? Was the hot stove melted by anything? Yes
+
+# Trans_intrans 14 Transitive_plausible
+The hot coffee melted the ice cream.
+? Did the ice cream melt from anything? Yes
+# Trans_intrans 14 Preposition_plausible
+The ice cream melted from the hot coffee.
+? Did the ice cream melt from anything? Yes
+# Trans_intrans 14 Transitive_implausible
+The ice cream melted the hot coffee.
+? Did the ice cream melt from anything? No
+# Trans_intrans 14 Preposition_implausible
+The hot coffee melted from the ice cream.
+? Did the ice cream melt from anything? No
+
+# Trans_intrans 15 Transitive_plausible
+The microwave melted the butter.
+? Was the microwave melted by anything? No
+# Trans_intrans 15 Preposition_plausible
+The butter melted inside the microwave.
+? Was the microwave melted by anything? No
+# Trans_intrans 15 Transitive_implausible
+The butter melted the microwave.
+? Was the microwave melted by anything? Yes
+# Trans_intrans 15 Preposition_implausible
+The microwave melted inside the butter.
+? Was the microwave melted by anything? Yes
+
+# Trans_intrans 16 Transitive_plausible
+The humidity worsened the eczema.
+? Was the eczema worsened by anything? Yes
+# Trans_intrans 16 Preposition_plausible
+The eczema worsened from the humidity.
+? Was the eczema worsened by anything? Yes
+# Trans_intrans 16 Transitive_implausible
+The eczema worsened the humidity.
+? Was the eczema worsened by anything? No
+# Trans_intrans 16 Preposition_implausible
+The humidity worsened from the eczema.
+? Was the eczema worsened by anything? No
+
+# Trans_intrans 17 Transitive_plausible
+The construction noise worsened the man's hearing.
+? Was the construction noise worsened by anything? No
+# Trans_intrans 17 Preposition_plausible
+The man's hearing worsened from the construction noise.
+? Was the construction noise worsened by anything? No
+# Trans_intrans 17 Transitive_implausible
+The man's hearing worsened the construction noise.
+? Was the construction noise worsened by anything? Yes
+# Trans_intrans 17 Preposition_implausible
+The construction noise worsened from the man's hearing.
+? Was the construction noise worsened by anything? Yes
+
+# Trans_intrans 18 Transitive_plausible
+The earthquake shattered the house.
+? Was the house shattered by anything? Yes
+# Trans_intrans 18 Preposition_plausible
+The house shattered from the earthquake.
+? Was the house shattered by anything? Yes
+# Trans_intrans 18 Transitive_implausible
+The house shattered the earthquake.
+? Was the house shattered by anything? No
+# Trans_intrans 18 Preposition_implausible
+The earthquake shattered from the house.
+? Was the house shattered by anything? No
+
+# Trans_intrans 19 Transitive_plausible
+The oven defrosted the lasagna.
+? Was the oven defrosted by anything? No
+# Trans_intrans 19 Preposition_plausible
+The lasagna defrosted inside the oven.
+? Was the oven defrosted by anything? No
+# Trans_intrans 19 Transitive_implausible
+The lasagna defrosted the oven.
+? Was the oven defrosted by anything? Yes
+# Trans_intrans 19 Preposition_implausible
+The oven defrosted inside the lasagna.
+? Was the oven defrosted by anything? Yes
+
+# Trans_intrans 20 Transitive_plausible
+The microwave defrosted the broccoli.
+? Was the broccoli defrosted by anything? Yes
+# Trans_intrans 20 Preposition_plausible
+The broccoli defrosted inside the microwave.
+? Was the broccoli defrosted by anything? Yes
+# Trans_intrans 20 Transitive_implausible
+The broccoli defrosted the microwave.
+? Was the broccoli defrosted by anything? No
+# Trans_intrans 20 Preposition_implausible
+The microwave defrosted inside the broccoli.
+? Was the broccoli defrosted by anything? No
+

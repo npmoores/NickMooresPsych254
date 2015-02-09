@@ -1,0 +1,260 @@
+# act-pass1 1 active_plausible
+The girl kicked the ball.
+? Did the girl kick something/someone? Yes
+# act-pass1 1 active_implausible
+The ball kicked the girl.
+? Did the girl kick something/someone? No
+# act-pass1 1 passive_implausible
+The girl was kicked by the ball.
+? Did the girl kick something/someone? No
+# act-pass1 1 passive_plausible
+The ball was kicked by the girl.
+? Did the girl kick something/someone? Yes
+
+# act-pass1 2 active_plausible
+The plumber bought the watch.
+? Did the plumber buy something/someone? Yes
+# act-pass1 2 active_implausible
+The watch bought the plumber.
+? Did the plumber buy something/someone? No
+# act-pass1 2 passive_implausible
+The plumber was bought by the watch.
+? Did the plumber buy something/someone? No
+# act-pass1 2 passive_plausible
+The watch was bought by the plumber.
+? Did the plumber buy something/someone? Yes
+
+# act-pass1 3 active_plausible
+The man drove the truck.
+? Did the man drive something/someone? Yes
+# act-pass1 3 active_implausible
+The truck drove the man.
+? Did the man drive something/someone? No
+# act-pass1 3 passive_implausible
+The man was driven by the truck.
+? Did the man drive something/someone? No
+# act-pass1 3 passive_plausible
+The truck was driven by the man.
+? Did the man drive something/someone? Yes
+
+# act-pass1 4 active_plausible
+The secretary licked the stamp.
+? Did the secretary lick something/someone? Yes
+# act-pass1 4 active_implausible
+The stamp licked the secretary.
+? Did the secretary lick something/someone? No
+# act-pass1 4 passive_implausible
+The secretary was licked by the stamp.
+? Did the secretary lick something/someone? No
+# act-pass1 4 passive_plausible
+The stamp was licked by the secretary.
+? Did the secretary lick something/someone? Yes
+
+# act-pass1 5 active_plausible
+The mother set the table.
+? Did the mother set something/someone? Yes
+# act-pass1 5 active_implausible
+The table set the mother.
+? Did the mother set something/someone? No
+# act-pass1 5 passive_implausible
+The mother was set by the table.
+? Did the mother set something/someone? No
+# act-pass1 5 passive_plausible
+The table was set by the mother.
+? Did the mother set something/someone? Yes
+
+# act-pass1 6 active_plausible
+The daughter folded the blanket.
+? Did the blanket fold something/someone? No
+# act-pass1 6 active_implausible
+The blanket folded the daughter.
+? Did the blanket fold something/someone? Yes
+# act-pass1 6 passive_implausible
+The daughter was folded by the blanket.
+? Did the blanket fold something/someone? Yes
+# act-pass1 6 passive_plausible
+The blanket was folded by the daughter.
+? Did the blanket fold something/someone? No
+
+# act-pass1 7 active_plausible
+The father sharpened the saw.
+? Did the saw sharpen something/someone? No
+# act-pass1 7 active_implausible
+The saw sharpened the father.
+? Did the saw sharpen something/someone? Yes
+# act-pass1 7 passive_implausible
+The father was sharpened by the saw.
+? Did the saw sharpen something/someone? Yes
+# act-pass1 7 passive_plausible
+The saw was sharpened by the father.
+? Did the saw sharpen something/someone? No
+
+# act-pass1 8 active_plausible
+The niece opened the door.
+? Did the door open something/someone? No
+# act-pass1 8 active_implausible
+The door opened the niece.
+? Did the door open something/someone? Yes
+# act-pass1 8 passive_implausible
+The niece was opened by the door.
+? Did the door open something/someone? Yes
+# act-pass1 8 passive_plausible
+The door was opened by the niece.
+? Did the door open something/someone? No
+
+# act-pass1 9 active_plausible
+The boy ate the pizza.
+? Did the pizza eat something/someone? No
+# act-pass1 9 active_implausible
+The pizza ate the boy.
+? Did the pizza eat something/someone? Yes
+# act-pass1 9 passive_implausible
+The boy was eaten by the pizza.
+? Did the pizza eat something/someone? Yes
+# act-pass1 9 passive_plausible
+The pizza was eaten by the boy.
+? Did the pizza eat something/someone? No
+
+# act-pass1 10 active_plausible
+The grandfather broke the bowl.
+? Did the bowl break something/someone? No
+# act-pass1 10 active_implausible
+The bowl broke the grandfather.
+? Did the bowl break something/someone? Yes
+# act-pass1 10 passive_implausible
+The grandfather was broken by the bowl.
+? Did the bowl break something/someone? Yes
+# act-pass1 10 passive_plausible
+The bowl was broken by the grandfather.
+? Did the bowl break something/someone? No
+
+# act-pass1 11 active_plausible
+The woman lost the diamond.
+? Did the diamond lose something/someone? No
+# act-pass1 11 active_implausible
+The diamond lost the woman.
+? Did the diamond lose something/someone? Yes
+# act-pass1 11 passive_implausible
+The woman was lost by the diamond.
+? Did the diamond lose something/someone? Yes
+# act-pass1 11 passive_plausible
+The diamond was lost by the woman.
+? Did the diamond lose something/someone? No
+
+# act-pass1 12 active_plausible
+The grandmother cleaned the oven.
+? Did the oven clean something/someone? No
+# act-pass1 12 active_implausible
+The oven cleaned the grandmother.
+? Did the oven clean something/someone? Yes
+# act-pass1 12 passive_implausible
+The grandmother was cleaned by the oven.
+? Did the oven clean something/someone? Yes
+# act-pass1 12 passive_plausible
+The oven was cleaned by the grandmother.
+? Did the oven clean something/someone? No
+
+# act-pass1 13 active_plausible
+The electrician stole the hammer.
+? Did the hammer steal something/someone? No
+# act-pass1 13 active_implausible
+The hammer stole the electrician.
+? Did the hammer steal something/someone? Yes
+# act-pass1 13 passive_implausible
+The electrician was stolen by the hammer.
+? Did the hammer steal something/someone? Yes
+# act-pass1 13 passive_plausible
+The hammer was stolen by the electrician.
+? Did the hammer steal something/someone? No
+
+# act-pass1 14 active_plausible
+The sister closed the window.
+? Did the window close something/someone? No
+# act-pass1 14 active_implausible
+The window closed the sister.
+? Did the window close something/someone? Yes
+# act-pass1 14 passive_implausible
+The sister was closed by the window.
+? Did the window close something/someone? Yes
+# act-pass1 14 passive_plausible
+The window was closed by the sister.
+? Did the window close something/someone? No
+
+# act-pass1 15 active_plausible
+The grandson sipped the water.
+? Did the water sip something/someone? No
+# act-pass1 15 active_implausible
+The water sipped the grandson.
+? Did the water sip something/someone? Yes
+# act-pass1 15 passive_implausible
+The grandson was sipped by the water.
+? Did the water sip something/someone? Yes
+# act-pass1 15 passive_plausible
+The water was sipped by the grandson.
+? Did the water sip something/someone? No
+
+# act-pass1 16 active_plausible
+The granddaughter boarded the train.
+? Did the granddaughter board something/someone? Yes
+# act-pass1 16 active_implausible
+The train boarded the granddaughter.
+? Did the granddaughter board something/someone? No
+# act-pass1 16 passive_implausible
+The granddaughter was boarded by the train.
+? Did the granddaughter board something/someone? No
+# act-pass1 16 passive_plausible
+The train was boarded by the granddaughter.
+? Did the granddaughter board something/someone? Yes
+
+# act-pass1 17 active_plausible
+The aunt purchased the book.
+? Did the aunt purchase something/someone? Yes
+# act-pass1 17 active_implausible
+The book purchased the aunt.
+? Did the aunt purchase something/someone? No
+# act-pass1 17 passive_implausible
+The aunt was purchased by the book.
+? Did the aunt purchase something/someone? No
+# act-pass1 17 passive_plausible
+The book was purchased by the aunt.
+? Did the aunt purchase something/someone? Yes
+
+# act-pass1 18 active_plausible
+The uncle sailed the boat.
+? Did the uncle sail something/someone? Yes
+# act-pass1 18 active_implausible
+The boat sailed the uncle.
+? Did the uncle sail something/someone? No
+# act-pass1 18 passive_implausible
+The uncle was sailed by the boat.
+? Did the uncle sail something/someone? No
+# act-pass1 18 passive_plausible
+The boat was sailed by the uncle.
+? Did the uncle sail something/someone? Yes
+
+# act-pass1 19 active_plausible
+The wife lit the candle.
+? Did the wife light something/someone? Yes
+# act-pass1 19 active_implausible
+The candle lit the wife.
+? Did the wife light something/someone? No
+# act-pass1 19 passive_implausible
+The wife was lit by the candle.
+? Did the wife light something/someone? No
+# act-pass1 19 passive_plausible
+The candle was lit by the wife.
+? Did the wife light something/someone? Yes
+
+# act-pass1 20 active_plausible
+The husband wrote the letter.
+? Did the husband write something/someone? Yes
+# act-pass1 20 active_implausible
+The letter wrote the husband.
+? Did the husband write something/someone? No
+# act-pass1 20 passive_implausible
+The husband was written by the letter.
+? Did the husband write something/someone? No
+# act-pass1 20 passive_plausible
+The letter was written by the husband.
+? Did the husband write something/someone? Yes
+

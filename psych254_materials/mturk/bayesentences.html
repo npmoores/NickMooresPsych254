@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <title>Oh No He Didn't!</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
+    <script src="mmturkey.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery.ui.all.css" />
+    <link rel="stylesheet" href="style.css" />
+    <meta name="viewport" content="initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="slide" id="welcome">
+      <img src="images/stanford.png" alt="Stanford University">
+        <p id='logo-text'>Stanford Language and Cognition Lab</p>
+        <p class="block-text">In this experiment, you will have several sentences presented to.
+                Your job is to read each sentence and respond to a question about it. Please click <em>Start</em> to read instructions and get started!
+        </p>
+        
+        <button type="button" id = "startButton" disabled="disabled" onClick="this.blur(); experiment.init();">Start</button>
+        <p id="pleaseWait"></p>
+        
+        <p class="block-text" id="legal">By answering the following questions, you are participating in a study being performed by cognitive scientists in the Stanford Department of Psychology. If you have questions about this research, please contact us at <a
+        href="mailto://languagecoglab@gmail.com.">languagecoglab@gmail.com</a>. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.
+
+        We have recently been made aware that your public Amazon.com profile can be accessed via your worker ID if you do not choose to opt out. If you would like to opt out of this feature, you may follow instructions available here:
+
+        <a href="https://www.amazon.com/gp/help/customer/display.html?nodeId=16465241">https://www.amazon.com/gp/help/customer/display.html?nodeId=16465241</a></p>
+    </div>
+    <!--This slide contains the first instructions page-->
+    <div class="slide" id="instructions1">
+      <img src="images/stanford.png" alt="Stanford University">
+      <p id='logo-text'>Stanford Language and Cognition Lab</p>
+        <p class="later-block">In this experiment, you will see many examples of sentences.  For each sentence, there will be a question written below it asking about what happened in the sentence.  Your job is to respond to the sentence with either <em>Yes</em> or <em>No</em>.
+          </p>
+            <br><p class="later-block-center"><strong>Ready to go? We'll give you a chance to practice first.  Hit <em>Start</em> below to get some practice!</strong></p>
+            <button type="button" id="nextInstructions" onClick="this.blur();">Start</button>
+        </div>
+    <!--This slide contains the first training exercise-->
+    <div class="slide" id="training1">
+ <table align="center" class="wrapper" id="practicetable1Wrapper">
+        <tr><td id="before">
+          <table class="dialogue" id="practiceTable1">
+            <th id="title"></th>
+            <tr><td class="dark"><strong><p align="center" id="utterancePractice">The mother gave the daughter the candle.</p></strong></td></tr>
+            <tr><td class="light"><p align="center" class="boring" id="questionPractice">Did the daughter receive something?</p></td></tr>
+          </table></td>
+        <tr align="center"><td align="center">
+          <div id="radioNext">
+            <input type="radio" id="yesPractice1" name="radioPractice1" value="Yes"><label for="yes" >Yes</label>
+            <br>
+            <input type="radio" id="noPractice1" name="radioPractice1" value="No"><label for="no" >No</label>
+            <br>
+          </div>
+        <div class="nextButton"><button id="nextTraining1" type="button" onClick="this.blur();">Next</button></div>
+      </td></tr>
+      </table>
+    </div>
+    <!--This slide contains the second training exercise-->
+    <div class="slide" id="training2">
+ <table align="center" class="wrapper" id="practicetable2Wrapper">
+        <tr><td id="before">
+          <table class="dialogue" id="practiceTable2">
+            <th id="title"></th>
+            <tr><td class="dark"><strong><p align="center" id="utterancePractice">The bartender poured the customer a drink.</p></strong></td></tr>
+            <tr><td class="light"><p align="center" class="boring" id="questionPractice">Was something poured for the customer?</p></td></tr>
+          </table></td></tr>
+        <tr align="center"><td align="center">
+          <div id="radioNext">
+            <input type="radio" id="yesPractice2" name="radioPractice2" value="Yes"><label for="yes" >Yes</label>
+            <br>
+            <input type="radio" id="noPractice2" name="radioPractice2" value="No"><label for="no" >No</label>
+            <br>
+          </div>
+        <div class="nextButton"><button id="nextTraining2" type="button" onClick="this.blur();">Next</button></div>
+      </td></tr>
+      </table>
+    </div>
+    <!--This slide masks the processes running to initialize the experiment...-->
+    <div class="slide" id="loading">
+      <p>Please wait while the experiment loads...</p>
+    </div>
+    <!--This slide tells the user that the experiment is about to begin...-->
+    <div class="slide" id="ready">
+      <p>Ready? Here we go!</p>
+    </div>
+    <!--This slide contains the stage div which cycles through each trial of the MTurk Study-->
+    <div class="slide" id="stage">
+      <table align="center" class="wrapper" id="realTableWrapper">
+        <tr><td id="before">
+          <table class="dialogue" id="realTable">
+            <th id="title"></th>
+            <tr><td class="dark"><strong><p align="center" id="utterance"> </p></strong></td></tr>
+            <tr><td class="light"><p align="center" class="boring" id="question"> </p></td></tr>
+          </table></td></tr>
+        <tr align="center"><td align="center">
+          <div id="radioNext">
+            <input type="radio" id="yes" name="radioNext" value="Yes"><label for="yes" >Yes</label>
+            <br>
+            <input type="radio" id="no" name="radioNext" value="No"><label for="no" >No</label>
+            <br>
+          </div>
+        <div class="nextButton"><button id="next" type="button" onClick="this.blur();">Next</button></div>
+      </td></tr>
+      </table>
+
+    <div id="message"> </div> <!--dynamically built in javascript-->
+    </div>
+    <!--This slide contians the finish div that displays the closing information data has been submitted by this point-->
+    <div class="slide" id="finish">
+      <img src="images/stanford.png" alt="Stanford University">
+        <p id='logo-text'>Stanford Language and Cognition Lab</p>
+        <p class="block-text">You're finished - thanks for participating! Please wait while we submit to Mechanical Turk...</p>
+    </div>
+    <script src="bayesentences.js"></script> 
+  </body>
+</html>

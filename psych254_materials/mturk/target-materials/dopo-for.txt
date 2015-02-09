@@ -1,0 +1,259 @@
+# dopo-for 1 PO_for_plausible
+The cook baked a cake for Lucy.
+? Was something baked for Lucy? Yes
+# dopo-for 1 DO_for_plausible
+The cook baked Lucy a cake.
+? Was something baked for Lucy? Yes
+# dopo-for 1 PO_for_implausible
+The cook baked Lucy for a cake.
+? Was something baked for Lucy? No
+# dopo-for 1 DO_for_implausible
+The cook baked a cake Lucy.
+? Was something baked for Lucy? No
+
+# dopo-for 2 PO_for_plausible
+The bartender poured a drink for the customer.
+? Was something poured for the customer? Yes
+# dopo-for 2 DO_for_plausible
+The bartender poured the customer a drink.
+? Was something poured for the customer? Yes
+# dopo-for 2 PO_for_implausible
+The bartender poured the customer for a drink.
+? Was something poured for the customer? No
+# dopo-for 2 DO_for_implausible
+The bartender poured a drink the customer.
+? Was something poured for the customer? No
+
+# dopo-for 3 PO_for_plausible
+The woman saved a seat for her husband.
+? Was something saved for the husband? Yes
+# dopo-for 3 DO_for_plausible
+The woman saved her husband a seat.
+? Was something saved for the husband? Yes
+# dopo-for 3 PO_for_implausible
+The woman saved her husband for a seat.
+? Was something saved for the husband? No
+# dopo-for 3 DO_for_implausible
+The woman saved a seat her husband.
+? Was something saved for the husband? No
+
+# dopo-for 4 PO_for_plausible
+The grandmother made a quilt for her granddaughter.
+? Was something made for the granddaughter? Yes
+# dopo-for 4 DO_for_plausible
+The grandmother made her granddaughter a quilt.
+? Was something made for the granddaughter? Yes
+# dopo-for 4 PO_for_implausible
+The grandmother made her granddaughter for a quilt.
+? Was something made for the granddaughter? No
+# dopo-for 4 DO_for_implausible
+The grandmother made a quilt her granddaughter.
+? Was something made for the granddaughter? No
+
+# dopo-for 5 PO_for_plausible
+The apprentice fetched a hammer for the carpenter.
+? Was something fetched for the carpenter? Yes
+# dopo-for 5 DO_for_plausible
+The apprentice fetched the carpenter a hammer.
+? Was something fetched for the carpenter? Yes
+# dopo-for 5 PO_for_implausible
+The apprentice fetched the carpenter for a hammer.
+? Was something fetched for the carpenter? No
+# dopo-for 5 DO_for_implausible
+The apprentice fetched a hammer the carpenter.
+? Was something fetched for the carpenter? No
+
+# dopo-for 6 PO_for_plausible
+The secretary ordered some office supplies for the boss.
+? Was something ordered for the boss? Yes
+# dopo-for 6 DO_for_plausible
+The secretary ordered the boss some office supplies.
+? Was something ordered for the boss? Yes
+# dopo-for 6 PO_for_implausible
+The secretary ordered the boss for some office supplies.
+? Was something ordered for the boss? No
+# dopo-for 6 DO_for_implausible
+The secretary ordered some office supplies the boss.
+? Was something ordered for the boss? No
+
+# dopo-for 7 PO_for_plausible
+The wife reserved table for her husband.
+? Was something reserved for the husband? Yes
+# dopo-for 7 DO_for_plausible
+The wife reserved her husband a table.
+? Was something reserved for the husband? Yes
+# dopo-for 7 PO_for_implausible
+The wife reserved her husband for a table.
+? Was something reserved for the husband? No
+# dopo-for 7 DO_for_implausible
+The wife reserved a table her husband.
+? Was something reserved for the husband? No
+
+# dopo-for 8 PO_for_plausible
+The father bought a bicycle for his son.
+? Was something bought for the son? Yes
+# dopo-for 8 DO_for_plausible
+The father bought his son a bicycle.
+? Was something bought for the son? Yes
+# dopo-for 8 PO_for_implausible
+The father bought his son for a bicycle.
+? Was something bought for the son? No
+# dopo-for 8 DO_for_implausible
+The father bought a bicycle his son.
+? Was something bought for the son? No
+
+# dopo-for 9 PO_for_plausible
+The charity built a house for the hurricane victim.
+? Was something built for the hurricane victim? Yes
+# dopo-for 9 DO_for_plausible
+The charity built the hurricane victim a house.
+? Was something built for the hurricane victim? Yes
+# dopo-for 9 PO_for_implausible
+The charity built the hurricane victim for a house.
+? Was something built for the hurricane victim? No
+# dopo-for 9 DO_for_implausible
+The charity built a house the hurricane victim.
+? Was something built for the hurricane victim? No
+
+# dopo-for 10 PO_for_plausible
+The waitress fixed a sandwich for the customer.
+? Was something fixed for the customer? Yes
+# dopo-for 10 DO_for_plausible
+The waitress fixed the customer a sandwich.
+? Was something fixed for the customer? Yes
+# dopo-for 10 PO_for_implausible
+The waitress fixed the customer for a sandwich.
+? Was something fixed for the customer? No
+# dopo-for 10 DO_for_implausible
+The waitress fixed a sandwich the customer.
+? Was something fixed for the customer? No
+
+# dopo-for 11 PO_for_plausible
+The grandmother baked some cookies for the grandson.
+? Was something baked for the cookies? No
+# dopo-for 11 DO_for_plausible
+The grandmother baked the grandson some cookies.
+? Was something baked for the cookies? No
+# dopo-for 11 PO_for_implausible
+The grandmother baked the grandson for some cookies.
+? Was something baked for the cookies? Yes
+# dopo-for 11 DO_for_implausible
+The grandmother baked some cookies the grandson.
+? Was something baked for the cookies? Yes
+
+# dopo-for 12 PO_for_plausible
+The nurse poured some water for the old man.
+? Was something poured for the water? No
+# dopo-for 12 DO_for_plausible
+The nurse poured the old man some water.
+? Was something poured for the water? No
+# dopo-for 12 PO_for_implausible
+The nurse poured the old man for some water.
+? Was something poured for the water? Yes
+# dopo-for 12 DO_for_implausible
+The nurse poured some water the old man.
+? Was something poured for the water? Yes
+
+# dopo-for 13 PO_for_plausible
+The receptionist saved some cake for her co-worker.
+? Was something saved for the cake? No
+# dopo-for 13 DO_for_plausible
+The receptionist saved her co-worker some cake.
+? Was something saved for the cake? No
+# dopo-for 13 PO_for_implausible
+The receptionist saved her co-worker for some cake.
+? Was something saved for the cake? Yes
+# dopo-for 13 DO_for_implausible
+The receptionist saved some cake her co-worker.
+? Was something saved for the cake? Yes
+
+# dopo-for 14 PO_for_plausible
+The seamstress made a dress for her client.
+? Was something made for the dress? No
+# dopo-for 14 DO_for_plausible
+The seamstress made her client a dress.
+? Was something made for the dress? No
+# dopo-for 14 PO_for_implausible
+The seamstress made her client for a dress.
+? Was something made for the dress? Yes
+# dopo-for 14 DO_for_implausible
+The seamstress made a dress her client.
+? Was something made for the dress? Yes
+
+# dopo-for 15 PO_for_plausible
+The lab-assistant fetched a test-tube for the scientist.
+? Was something fetched for the test-tube? No
+# dopo-for 15 DO_for_plausible
+The lab-assistant fetched the scientist a test-tube.
+? Was something fetched for the test-tube? No
+# dopo-for 15 PO_for_implausible
+The lab-assistant fetched the scientist for a test-tube.
+? Was something fetched for the test-tube? Yes
+# dopo-for 15 DO_for_implausible
+The lab-assistant fetched a test-tube the scientist.
+? Was something fetched for the test-tube? Yes
+
+# dopo-for 16 PO_for_plausible
+The man ordered some champagne for his girlfriend.
+? Was something ordered for the champagne? No
+# dopo-for 16 DO_for_plausible
+The man ordered his girlfriend some champagne.
+? Was something ordered for the champagne? No
+# dopo-for 16 PO_for_implausible
+The man ordered his girlfriend for some champagne.
+? Was something ordered for the champagne? Yes
+# dopo-for 16 DO_for_implausible
+The man ordered some champagne his girlfriend.
+? Was something ordered for the champagne? Yes
+
+# dopo-for 17 PO_for_plausible
+The travel agent reserved a flight for the businessman.
+? Was something reserved for the flight? No
+# dopo-for 17 DO_for_plausible
+The travel agent reserved the businessman a flight.
+? Was something reserved for the flight? No
+# dopo-for 17 PO_for_implausible
+The travel agent reserved the businessman for a flight.
+? Was something reserved for the flight? Yes
+# dopo-for 17 DO_for_implausible
+The travel agent reserved a flight the businessman.
+? Was something reserved for the flight? Yes
+
+# dopo-for 18 PO_for_plausible
+The boyfriend obtained some concert tickets for his girlfriend.
+? Was something obtained for the concert tickets? No
+# dopo-for 18 DO_for_plausible
+The boyfriend obtained his girlfriend some concert tickets.
+? Was something obtained for the concert tickets? No
+# dopo-for 18 PO_for_implausible
+The boyfriend obtained his girlfriend for some concert tickets.
+? Was something obtained for the concert tickets? Yes
+# dopo-for 18 DO_for_implausible
+The boyfriend obtained some concert tickets his girlfriend.
+? Was something obtained for the concert tickets? Yes
+
+# dopo-for 19 PO_for_plausible
+The church built a shelter for the homeless.
+? Was something built for the shelter? No
+# dopo-for 19 DO_for_plausible
+The church built the homeless a shelter.
+? Was something built for the shelter? No
+# dopo-for 19 PO_for_implausible
+The church built the homeless for a shelter.
+? Was something built for the shelter? Yes
+# dopo-for 19 DO_for_implausible
+The church built a shelter the homeless.
+? Was something built for the shelter? Yes
+
+# dopo-for 20 PO_for_plausible
+The babysitter fixed some lunch for the child.
+? Was something fixed for the lunch? No
+# dopo-for 20 DO_for_plausible
+The babysitter fixed the child some lunch.
+? Was something fixed for the lunch? No
+# dopo-for 20 PO_for_implausible
+The babysitter fixed the child for some lunch.
+? Was something fixed for the lunch? Yes
+# dopo-for 20 DO_for_implausible
+The babysitter fixed some lunch the child.
+? Was something fixed for the lunch? Yes

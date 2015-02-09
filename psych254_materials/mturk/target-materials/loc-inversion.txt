@@ -1,0 +1,260 @@
+# loc-inversion 1 plaus_obj
+A magnificent diamond sparkled on the prince's finger.
+? Was there a diamond on the prince's finger? Yes
+# loc-inversion 1 plaus_subj
+On the prince's finger sparkled a magnificent diamond.
+? Was there a diamond on the prince's finger? Yes
+# loc-inversion 1 implaus_subj
+On a magnificent diamond sparkled the prince's finger.
+? Was there a diamond on the prince's finger? No
+# loc-inversion 1 implaus_obj
+The prince's finger sparkled on a magnificent diamond.
+? Was there a diamond on the prince's finger? No
+
+# loc-inversion 2 plaus_obj
+A flowering plant is on the window sill.
+? Is there a plant on the window sill? Yes
+# loc-inversion 2 plaus_subj
+On the window sill is a flowering plant.
+? Is there a plant on the window sill? Yes
+# loc-inversion 2 implaus_subj
+On a flowering plant is the window sill.
+? Is there a plant on the window sill? No
+# loc-inversion 2 implaus_obj
+The window sill is on a flowering plant.
+? Is there a plant on the window sill? No
+
+# loc-inversion 3 plaus_obj
+An old woman lives in the woods.
+? Does a woman live in the woods? Yes
+# loc-inversion 3 plaus_subj
+In the woods lives an old woman.
+? Does a woman live in the woods? Yes
+# loc-inversion 3 implaus_subj
+In an old woman lives the woods.
+? Does a woman live in the woods? No
+# loc-inversion 3 implaus_obj
+The woods lives in an old woman.
+? Does a woman live in the woods? No
+
+# loc-inversion 4 plaus_obj
+A cat jumped onto the table.
+? Was there a cat on the table? Yes
+# loc-inversion 4 plaus_subj
+Onto the table jumped a cat.
+? Was there a cat on the table? Yes
+# loc-inversion 4 implaus_subj
+Onto a cat jumped the table.
+? Was there a cat on the table? No
+# loc-inversion 4 implaus_obj
+The table jumped onto a cat.
+? Was there a cat on the table? No
+
+# loc-inversion 5 plaus_obj
+A choir sang in the church.
+? Did a choir sing inside the church? Yes
+# loc-inversion 5 plaus_subj
+In the church sang a choir.
+? Did a choir sing inside the church? Yes
+# loc-inversion 5 implaus_subj
+In a choir sang the church.
+? Did a choir sing inside the church? No
+# loc-inversion 5 implaus_obj
+The church sang in a choir.
+? Did a choir sing inside the church? No
+
+# loc-inversion 6 plaus_obj
+An old man wandered into a bathroom.
+? Did an old man go into a bathroom? Yes
+# loc-inversion 6 plaus_subj
+Into a bathroom wandered an old man.
+? Did an old man go into a bathroom? Yes
+# loc-inversion 6 implaus_subj
+Into an old man wandered a bathroom.
+? Did an old man go into a bathroom? No
+# loc-inversion 6 implaus_obj
+A bathroom wandered into an old man.
+? Did an old man go into a bathroom? No
+
+# loc-inversion 7 plaus_obj
+The baby crawled into the hallway.
+? Did the baby go into the hallway? Yes
+# loc-inversion 7 plaus_subj
+Into the hallway crawled the baby.
+? Did the baby go into the hallway? Yes
+# loc-inversion 7 implaus_subj
+Into the baby crawled the hallway.
+? Did the baby go into the hallway? No
+# loc-inversion 7 implaus_obj
+The hallway crawled into the baby.
+? Did the baby go into the hallway? No
+
+# loc-inversion 8 plaus_obj
+The marathoner ran into the stadium.
+? Did the marathoner go into the stadium? Yes
+# loc-inversion 8 plaus_subj
+Into the stadium ran the marathoner.
+? Did the marathoner go into the stadium? Yes
+# loc-inversion 8 implaus_subj
+Into the marathoner ran the stadium.
+? Did the marathoner go into the stadium? No
+# loc-inversion 8 implaus_obj
+The stadium ran into the marathoner.
+? Did the marathoner go into the stadium? No
+
+# loc-inversion 9 plaus_obj
+The boy walked into the metal detector.
+? Did the boy go into the metal detector? Yes
+# loc-inversion 9 plaus_subj
+Into the metal detector walked the boy.
+? Did the boy go into the metal detector? Yes
+# loc-inversion 9 implaus_subj
+Into the boy walked the metal detector.
+? Did the boy go into the metal detector? No
+# loc-inversion 9 implaus_obj
+The metal detector walked into the boy.
+? Did the boy go into the metal detector? No
+
+# loc-inversion 10 plaus_obj
+The painting hung on the bedroom wall.
+? Was the painting hanging on the wall? Yes
+# loc-inversion 10 plaus_subj
+On the bedroom wall hung the painting.
+? Was the painting hanging on the wall? Yes
+# loc-inversion 10 implaus_subj
+On the painting hung the bedroom wall.
+? Was the painting hanging on the wall? No
+# loc-inversion 10 implaus_obj
+The bedroom wall hung on the painting.
+? Was the painting hanging on the wall? No
+
+# loc-inversion 11 plaus_obj
+The helicopter hovered over the water.
+? Did the water hover over the helicopter? No
+# loc-inversion 11 plaus_subj
+Over the water hovered the helicopter.
+? Did the water hover over the helicopter? No
+# loc-inversion 11 implaus_subj
+Over the helicopter hovered the water.
+? Did the water hover over the helicopter? Yes
+# loc-inversion 11 implaus_obj
+The water hovered over the helicopter.
+? Did the water hover over the helicopter? Yes
+
+# loc-inversion 12 plaus_obj
+The small plant grew into a huge tree.
+? Did the huge tree grow into the small plant? No
+# loc-inversion 12 plaus_subj
+Into a huge tree grew the small plant.
+? Did the huge tree grow into the small plant? No
+# loc-inversion 12 implaus_subj
+Into the small plant grew a huge tree.
+? Did the huge tree grow into the small plant? Yes
+# loc-inversion 12 implaus_obj
+A huge tree grew into the small plant.
+? Did the huge tree grow into the small plant? Yes
+
+# loc-inversion 13 plaus_obj
+A ghost appeared above the bed.
+? Did the bed appear above a ghost? No
+# loc-inversion 13 plaus_subj
+Above the bed appeared a ghost.
+? Did the bed appear above a ghost? No
+# loc-inversion 13 implaus_subj
+Above a ghost appeared the bed.
+? Did the bed appear above a ghost? Yes
+# loc-inversion 13 implaus_obj
+The bed appeared above a ghost.
+? Did the bed appear above a ghost? Yes
+
+# loc-inversion 14 plaus_obj
+The train arrived at the station.
+? Did the station arrive at the train? No
+# loc-inversion 14 plaus_subj
+At the station arrived the train.
+? Did the station arrive at the train? No
+# loc-inversion 14 implaus_subj
+At the train arrived the station.
+? Did the station arrive at the train? Yes
+# loc-inversion 14 implaus_obj
+The station arrived at the train.
+? Did the station arrive at the train? Yes
+
+# loc-inversion 15 plaus_obj
+Some treasure was found in the cave.
+? Was the cave found inside the treasure? No
+# loc-inversion 15 plaus_subj
+In the cave was found some treasure.
+? Was the cave found inside the treasure? No
+# loc-inversion 15 implaus_subj
+In some treasure was found the cave.
+? Was the cave found inside the treasure? Yes
+# loc-inversion 15 implaus_obj
+The cave was found in some treasure.
+? Was the cave found inside the treasure? Yes
+
+# loc-inversion 16 plaus_obj
+The name was engraved on the ring.
+? Was the ring engraved on the name? No
+# loc-inversion 16 plaus_subj
+On the ring was engraved the name.
+? Was the ring engraved on the name? No
+# loc-inversion 16 implaus_subj
+On the name was engraved the ring.
+? Was the ring engraved on the name? Yes
+# loc-inversion 16 implaus_obj
+The ring was engraved on the name.
+? Was the ring engraved on the name? Yes
+
+# loc-inversion 17 plaus_obj
+The mobile was hanging from the ceiling.
+? Was the ceiling hanging from the mobile? No
+# loc-inversion 17 plaus_subj
+From the ceiling was hanging the mobile.
+? Was the ceiling hanging from the mobile? No
+# loc-inversion 17 implaus_subj
+From the mobile was hanging the ceiling.
+? Was the ceiling hanging from the mobile? Yes
+# loc-inversion 17 implaus_obj
+The ceiling was hanging from the mobile.
+? Was the ceiling hanging from the mobile? Yes
+
+# loc-inversion 18 plaus_obj
+The apple was placed on the teacher's desk.
+? Was the teacher's desk put on the apple? No
+# loc-inversion 18 plaus_subj
+On the teacher's desk was placed the apple.
+? Was the teacher's desk put on the apple? No
+# loc-inversion 18 implaus_subj
+On the apple was placed the teacher's desk.
+? Was the teacher's desk put on the apple? Yes
+# loc-inversion 18 implaus_obj
+The teacher's desk was placed on the apple.
+? Was the teacher's desk put on the apple? Yes
+
+# loc-inversion 19 plaus_obj
+The defendant's name was written on the check.
+? Was the check written on the defendant's name? No
+# loc-inversion 19 plaus_subj
+On the check was written the defendant's name.
+? Was the check written on the defendant's name? No
+# loc-inversion 19 implaus_subj
+On the defendant's name was written the check.
+? Was the check written on the defendant's name? Yes
+# loc-inversion 19 implaus_obj
+The check was written on the defendant's name.
+? Was the check written on the defendant's name? Yes
+
+# loc-inversion 20 plaus_obj
+The moose's head was mounted on the wall.
+? Was the wall mounted on the moose's head? No
+# loc-inversion 20 plaus_subj
+On the wall was mounted the moose's head.
+? Was the wall mounted on the moose's head? No
+# loc-inversion 20 implaus_subj
+On the moose's head was mounted the wall.
+? Was the wall mounted on the moose's head? Yes
+# loc-inversion 20 implaus_obj
+The wall was mounted on the moose's head.
+? Was the wall mounted on the moose's head? Yes
+
