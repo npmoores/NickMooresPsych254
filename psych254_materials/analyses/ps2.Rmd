@@ -1,9 +1,30 @@
 ---
 title: 'Psych 254 W15 PS #2'
-author: "Mike Frank"
+author: "Nicholas Moores"
 date: "February 4, 2015"
 output: html_document
 ---
+
+Give a hint of what they're looking at with the behavioral data and what they found
+then go into imaging 
+ROI method
+ROI data
+Searchlight method
+Searchlight data
+etc.
+
+Results are a little confusing -- they found some nice evidence for the hippocampus stuff but the rest seems exploratory
+
+Background reading: 
+Polyn et al, 2009 computational model is dense
+Haxby 2001 --> similar methods (grandfather but not the great grandfather)
+Make sure you read the supplement -- if there's relevant stuff in there have back up slides. Have the supplement available.
+
+If people ask about data modeling or slice prescription just say that 'I'm still learning about neuroimaging. I can tell you what the words say but I don't quite know what it means yet.' Focus on the pattern similarity analysis section!
+
+Modeled every trial on its own; trying to get an estimate of brain activity for each image on the screen. Pattern Similarity Analysis: for each of the encoding trials, get an estimate of what the activity int he brain looked like during each trial. For each voxel, for each trial, there was a number representing what they think the brain response was. For two trials, they take all the voxels for one trial and put them into a vector, take all the voxels for the other trial and put them into a vector, then take the correlation between them. If you get high correlation, that's high pattern similarity
+
+Pattern similarity is a common enough analysis that people will know what it means; treating your 3D cube of values as a single vector, one to one correspondence for the same voxels in a vector representing the other trial, then correlation between the two.
 
 This is problem set #2, in which we hope you will practice the visualization package ggplot2, as well as hone your knowledge of the packages tidyr and dplyr. 
 
@@ -19,8 +40,10 @@ I've adapted this for psych 254 purposes
 First install and load the package.
 
 ```{r}
-install.packages("ggplot2")
 library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(stringr)
 ```
 
 Now we're going to use qplot. qplot is the easy interface, meant to replace plot. You can give it simple `qplot(x,y)` examples, or slightly more complex examples like `qplot(x, y, col=grp, data=d)`. 
@@ -35,16 +58,32 @@ qplot(diamonds$carat, diamonds$price)
 Scatter plots are trivial, and easy to add features to. Modify this plot so that it uses the dataframe rather than working from variables in the general namespace (good to get away from retyping `diamonds$` every time you reference a variable). 
 
 ```{r}
+ggplot(diamonds, aes(x=carat, y=price)) +
+  ggtitle("Diamonds by Carat and Price") +
+  xlab("Diamond Carats") + ylab("Diamond Price") + 
+    geom_point(shape=16, 
+               color = 'black',
+               alpha = 0.5)
 ```
 
 Try adding clarity and cut, using shape and color as your visual variables. 
 
 ```{r}
+ggplot(diamonds, aes(x=carat, y=price)) +
+  ggtitle("Diamonds by Carat and Price") +
+  xlab("Diamond Carats") + ylab("Diamond Price") + 
+    geom_point(aes(shape=clarity, 
+               color = cut))
 ```
-
 One of the primary benefits of `ggplot2` is the use of facets - also known as small multiples in the Tufte vocabulary. That last plot was probably hard to read. Facets could make it better. Try adding a `facets = x ~ y` argument. `x ~ y` means row facets are by x, column facets by y. 
 
 ```{r}
+ggplot(diamonds, aes(x=carat, y=price)) +
+  ggtitle("Diamonds by Carat and Price") +
+  xlab("Diamond Carats") + ylab("Diamond Price") + 
+    geom_point(aes(shape=clarity, 
+               color = cut)) +
+  facet_grid(clarity ~ cut)
 ```
 
 But facets can also get overwhelming. Try to strike a good balance between color, shape, and faceting.
@@ -126,31 +165,56 @@ d.b <- read.csv("../data/sklar_expt6b_corrected.csv")
 Gather these datasets into long form and get rid of the Xs in the headers.
 
 ```{r}
+subinfo <- tbl_df(subinfo)
+d.a <- tbl_df(d.a)
+d.b <- tbl_df(d.b)
+d.a.tidy <- d.a %>% gather("x_type", "RT", X1:X21, na.rm=TRUE) %>% mutate(x_type = gsub("X","",x_type))
+d.b.tidy <- d.b %>% gather("x_type", "RT", X22:X42, na.rm=TRUE) %>% mutate(x_type = gsub("X","",x_type))
+glimpse(subinfo)
+glimpse(d.a.tidy)
+glimpse(d.b.tidy)
 ```
 
 Bind these together. Check out `bind_rows`.
 
 ```{r}
+d.all.tidy <- bind_rows(d.a.tidy, d.b.tidy)
 ```
 
 Merge these with subject info. You will need to look into merge and its relatives, `left_join` and `right_join`. Call this dataframe `d`, by convention. 
 
 ```{r}
+subinfo <- subinfo %>% rename(subjectID = subid)
+d.all.tidy <- d.all.tidy %>% rename(subjectID = x_type)
+subinfo$subjectID <- as.factor(subinfo$subjectID)
+d.all.tidy$subjectID <- as.factor(d.all.tidy$subjectID)
+d.all.tidy <- left_join(subinfo, d.all.tidy, by="subjectID")
+d.all.tidy$subjectID <- as.factor(d.all.tidy$subjectID)
 ```
 
 Clean up the factor structure.
 
 ```{r}
-d$presentation.time <- factor(d$presentation.time)
-levels(d$operand) <- c("addition","subtraction")
+d.all.tidy$presentation.time <- factor(d.all.tidy$presentation.time)
+levels(d.all.tidy$operand) <- c("addition","subtraction")
 ```
 
 Data Analysis Preliminaries
 ---------------------------
 
+Operand x congruency x presentation time. Challenging to know what to collapse and what not to.
+
 Examine the basic properties of the dataset. First, take a histogram.
 
 ```{r}
+m.rt <- exp(mean(log(d.all.tidy$RT),na.rm=TRUE)) #take log average of RT: average natural logs of RTs, then take the exponential of that
+sd.rt <- exp(sd(log(d.all.tidy$RT),na.rm=TRUE)) #geometric standard deviation: exponentiated value of the standard deviation of the log-transformed values
+qplot(RT, data=d.all.tidy) + 
+  geom_vline(xintercept=m.rt + 2*sd.rt, col="red", lty=2) + #lets us view how much is spread 2 SDs above mean
+  geom_vline(xintercept=m.rt - 2*sd.rt, col="red", lty=2) + #lets us view how much is spread 2 SDs below mean
+  xlab("RT spread") +
+  ylab("Frequency") +
+  ggtitle("RT Histogram of Sklav Data (marking +/- 2 SDs)")
 ```
 
 Challenge question: what is the sample rate of the input device they are using to gather RTs?
@@ -160,6 +224,7 @@ Challenge question: what is the sample rate of the input device they are using t
 
 Sklar et al. did two manipulation checks. Subjective - asking participants whether they saw the primes - and objective - asking them to report the parity of the primes (even or odd) to find out if they could actually read the primes when they tried. Examine both the unconscious and conscious manipulation checks (this information is stored in subinfo). What do you see? Are they related to one another?
 
+Run a logistic regression on it! They are related. Put a red box around people that they kept.
 ```{r} 
 ```
 
@@ -174,7 +239,9 @@ Sklar et al.'s analysis
 Sklar et al. show a plot of a "facilitation effect" - the time to respond to incongruent primes minus the time to respond to congruent primes. They then show plot this difference score for the subtraction condition and for the two presentation times they tested. Try to reproduce this analysis.
 
 HINT: first take averages within subjects, then compute your error bars across participants, using the `sem` function (defined above). 
+somewhere: do objective.test x facilitation scatterplot with lm
 
+somwhere: do distance x RT scatterplot, with color by congruent
 ```{r}
 ```
 
