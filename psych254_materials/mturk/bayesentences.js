@@ -24,33 +24,18 @@ bayesentences_submit.php (to write the data to the server)
 
 var numTrials = 60; //governs the number of trials in the experiment
 var subjectID = turk.workerId;
-var tag;
-var newfilepath = ""; //will hold the filepath of the file once it's in the temp folder
-var newlocalpath = ""; //will hold the truncated filepath php will use to move the file
-var inputfile = ""; //holds the address to the temp folder
-var outputfile = ""; //holds the address to the unavailableTrials folder
-var abortfile = ""; //holds the address back to the turkerTrials folder
+var data;
+var decision;
+var inputfilepath = "ActivePassiveList1.csv";
 var counter = '/60 trials completed';
-var numCSVRows = ;
+var numCSVRows = 61;
 var pauseTime = 500; //governs the animation look
-var databaseFile = "langcog_negsearch_mturk_database.csv";
-var password = "negsearch"; //the password to use for the study
 var conditions = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59];
 var experiment_result_array = [];
-var result_headers = ["line_number", "subjectID", "file_name", "age", "context_utterance", "utterance", "tag", "day", "time"];
+var result_headers = ["subjectID", "list_number", "alternation","item_number", "utterance", "question", "alt_tag", "syntax_interpretation", "answer", "day", "time"];
 experiment_result_array[0] = result_headers; //puts in headers for result file
 
 /*---------------- HELPER FUNCTIONS------------------*/
-
-//if the user changes the channel too soon
-$(window).unload(function(event) {
-	experiment.abort();
-});
-
-//if the experimenter reloads the page while testing
-$(window).bind('beforeunload',function(event) {
-	experiment.abort();
-});
 
 // show slide function
 function showSlide(id) {
@@ -114,10 +99,11 @@ function getDialogueList() {
 	$.ajaxSetup({
 		async: false
 	}); //allows php to execute fully before returning to javascript to update condArray
-	var php_url = "https://langcog.stanford.edu/cgi-bin/NPM_negsearch_mturk/negsearch_mturk_filereading.php";
-	var php_filename = "?w1=" + newfilepath; //this first php param will tell it which file to look in
+	var php_url = "https://langcog.stanford.edu/cgi-bin/NPM_bayesentences/bayesentences_filereading.php";
+	var php_filename = "?w1=" + inputfilepath; //this first php param will tell it which file to look in
 	var php_filesize = "&w2=" + numCSVRows; //this second php param will tell it how many rows to bring back over
 	var total_request = php_url + php_filename + php_filesize;
+	console.log(total_request)
 	$.get(total_request, function(data) {
 		data_capsule = data;
 	}, "json");
@@ -159,29 +145,9 @@ function redrawDialogue(condArray, trial) {
 	var correct = condArray[5];
 	var title_string = "What's going on in the sentence?... &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;" + trial + counter + "</th>";
 	document.getElementById("utterance").innerHTML = utterance;
-	document.getElementById("question").innerHTML = after_1;
+	document.getElementById("question").innerHTML = question;
 	document.getElementById("title").innerHTML = title_string;
 	return;
-}
-
-function experimentLoad() {
-	$.ajaxSetup({
-		async: false
-	}); //allows php to execute fully before returning to javascript to update condArray
-	var php_url = "https://langcog.stanford.edu/cgi-bin/NPM_negsearch_mturk/negsearch_mturk_temp_in.php";
-	var capsule = "";
-	var getter = $.get(php_url, function(data) {
-		capsule = data;
-		newfilepath = data;
-		wait = false;
-	}, "json");
-	newlocalpath = newfilepath.substring(newfilepath.indexOf("temp/"));
-	inputfile = newlocalpath;
-	var subpath = inputfile.substring(inputfile.indexOf("langcog"));
-	outputfile = "unavailableTrials/" + subpath;
-	abortfile = "turkerTrials/" + subpath;
-	console.log("data file is now in " + newlocalpath);
-	return wait;
 }
 
 /*Function: submitData
@@ -191,19 +157,16 @@ function experimentLoad() {
   Submits post request to results php script and ends the experiment
 */
 function submitData(expdata) {
-	var outfile = "bayesentences_" + subjectID + "_Exp1results.csv";
+	var outfilepath = "bayesentences_" + subjectID + "_Exp1results.csv";
 	$("#stage").fadeOut(); //fades out the stage slide
-	console.log("input will be: " + inputfile + " and output will be " + outputfile);
 	var submiter = $.post("https://langcog.stanford.edu/cgi-bin/NPM_bayesentences/bayesentences_submit.php", {
-		result_file_path: outfile,
+		result_file_path: outfilepath,
 		postresult_array: experiment_result_array,
-		old_path: inputfile,
-		new_path: outputfile
 	}); //posts the results to the server using php
 	// experiment.end(); //calls the experiment's end function
-	$.when(submiter).then(function() {
+	/*$.when(submiter).then(function() {
 		turk.submit(expdata, true); //submits demo data to turk
-	});
+	});*/
 	return;
 }
 
@@ -219,28 +182,7 @@ function submitData(expdata) {
   -end: displays closing information
   */
 
-showSlide("welcome"); //shows the instructions slide and is ready to start the experiment
-
-//Button is disabled if turk is in preview mode
-//Button is also disabled if experiment is not done loading
-$("#pleaseWait").html("Please wait while the experiment loads...");
-$("#startButton").attr("disabled", true);
-var wait = true //keep button disabled until wait == false
-
-//if turk is in preview mode, don't load the data
-// once turker has accepted HIT, experimentLoad() is run
-//Once data is loaded, wait is set to false and the button is disabled
-if (turk.previewMode != true) {
-	wait = experimentLoad();
-}
-
-if (wait == false) {
-	$("#startButton").attr("disabled", false);
-	$("#pleaseWait").html("");
-}
-
 var experiment = { //var containing the experiment, though everything is called from within it
-
 	/*
 	  Function: init
 	  Usage: experiment.init()
@@ -249,9 +191,9 @@ var experiment = { //var containing the experiment, though everything is called 
 	  Called after training when a trial is about to begin during timeout.
 	  Decides which list condition to use.*/
 	init: function() { //governs which rubric to follow (voice, trial type, etc)
-		var data = getDialogueList(); //sets up which experiment we use; calls getWordList
-		//conditions = shuffle(conditions); //randomizes order of the trials
-		experiment.training(data); //begins the actual experiment using this new subset of trials
+		data = getDialogueList(); //sets up which experiment we use; calls getWordList
+		conditions = shuffle(conditions); //randomizes order of the trials
+		return false
 	}, //finishes declaration of init method
 
 	/*  Function: training
@@ -260,7 +202,7 @@ var experiment = { //var containing the experiment, though everything is called 
 		Returns: none
 		Will call the createDot(x,y,i) function, calls experiment.next()
 	*/
-	training: function(data) {
+	training: function() {
 		$("#loading").fadeOut("fast");
 		showSlide("instructions1");
 
@@ -301,32 +243,35 @@ var experiment = { //var containing the experiment, though everything is called 
 			$("#radioNext").buttonset()
 		}, pauseTime * 4);
 		var trial_result_array = []; //initializes result_string variable that will hold the result of each trial, to be parsed later
+		var result_headers = ["subjectID", "list_number", "alternation","item_number", "utterance", "question", "alt_tag", "syntax_interpretation", "day", "time"];
 		var subjID = 0;
-		var alternation = 1;
-		var utterance = 2;
-		var question = 3;
-		var alternation_tag = 4;
-		var item_number = 5;
-		var correct = 6;
-		var answer = 7;
-		var day = 8;
-		var time = 9;
+		var list_number = 1;
+		var alternation = 2;
+		var item_number = 3;
+		var utterance = 4;
+		var question = 5;
+		var alt_tag = 6;
+		var syntax_interpretation = 7;
+		var answer = 8;
+		var day = 9;
+		var time = 10;
 		$('#next').on('click', function(event) {
 			var decision = $('input[name=radioNext]:checked', '#radioNext').val()
+			console.log(decision)
 			if (decision == undefined) { //user didn't pick anything! Silly user...
 				alert("What happened in the sentence? Please make a selection!");
 			} else { //if the user picked something
 				i++; //increments the counter (only way the experiment advances, when they click next)
-				tag = decision
-				console.log("tag is " + tag);
+				console.log("user decision is " + decision);
 				trial_result_array[subjID] = subjectID;
+				trial_result_array[list_number] = condArray[6];
 				trial_result_array[alternation] = condArray[0];
+				trial_result_array[item_number] = condArray[4];
 				trial_result_array[utterance] = condArray[1];
 				trial_result_array[question] = condArray[2];
-				trial_result_array[alternation_tag] = condArray[3];
-				trial_result_array[item_number] = condArray[4];
-				trial_result_array[correct] = condArray[5];
-				trial_result_array[answer] = tag;
+				trial_result_array[alt_tag] = condArray[3];
+				trial_result_array[syntax_interpretation] = condArray[5];
+				trial_result_array[answer] = decision;
 				trial_result_array[day] = getCurrentDate();
 				trial_result_array[time] = getCurrentTime();
 				experiment_result_array[i] = trial_result_array; //adds this trials results to the overall result array
@@ -362,7 +307,7 @@ var experiment = { //var containing the experiment, though everything is called 
 	  called when the user has prematurely quit the HIT */
 	abort: function() {
 		var data_report = "";
-		var php_url = "https://langcog.stanford.edu/cgi-bin/NPM_bayesentences/negsearch_mturk_temp_out.php";
+		var php_url = "https://langcog.stanford.edu/cgi-bin/NPM_bayesentences/bayesentences_temp_out.php";
 		var php_filename = "?w1=" + inputfile; //this first php param will tell it which file to look in
 		var php_filesize = "&w2=" + abortfile; //this second php param will tell it how many rows to bring back over
 		var total_request = php_url + php_filename + php_filesize;
@@ -385,4 +330,24 @@ var experiment = { //var containing the experiment, though everything is called 
 			// 	turk.submit(experiment, true);
 			// }, 1500);
 	}, //finishes declaration of end method
+}
+
+showSlide("welcome"); //shows the instructions slide and is ready to start the experiment
+
+//Button is disabled if turk is in preview mode
+//Button is also disabled if experiment is not done loading
+$("#pleaseWait").html("Please wait while the experiment loads...");
+$("#startButton").attr("disabled", true);
+var wait = true //keep button disabled until wait == false
+
+//if turk is in preview mode, don't load the data
+// once turker has accepted HIT, experimentLoad() is run
+//Once data is loaded, wait is set to false and the button is disabled
+if (turk.previewMode != true) {
+	wait = experiment.init();
+}
+
+if (wait == false) {
+	$("#startButton").attr("disabled", false);
+	$("#pleaseWait").html("");
 }

@@ -3,9 +3,6 @@
 	$experiment_result = $_POST['postresult_array']; //gets the post data from javascript, namely the experiment results
 	$new_line = "\n";
 	$out_file_name = $_POST['result_file_path'];
-	$input= $_POST['old_path'];
-	$output = $_POST['new_path'];
-	rename($input, $output);
 
 	foreach ($experiment_result as $trial) { //iterates through each array of multidimensional array
 		foreach ($trial as $item) { //iterates through each item in each array
@@ -15,5 +12,4 @@
 		}
 		file_put_contents($out_file_name, $new_line, FILE_APPEND);
 	}
-	echo json_encode($output);
 ?>

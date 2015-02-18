@@ -1,0 +1,314 @@
+/**
+## General styles
+This stuff can be ported from experiment to experiment.*/
+
+/** We want the page to sit flush inside the browser window - that means no margins or padding. Also, use a nice-looking serif font. */
+body {
+	padding: 0;
+	margin: 0;
+	font-family: Palatino Linotype, Bookman Antiqua, Palatino, serif;
+	font-size: 16px;
+	line-height: 20px;
+}
+
+
+/** We manage display using "slides". A slide is a <code>div</code> that takes up the entire page. Only one slide should be visible at a time. Navigation between slides is most sensibly accomplished using buttons, rather than keyboard events. */
+.slide {
+	width: 95%;
+	height: 95%;
+	display: none;
+	position: absolute;
+	margin: 0;
+	margin-left: 0.5%;
+	padding: 1% 2% 1% 2%;
+}
+
+input, select, button {font-family: Georgia, serif; font-size: 14px;}
+
+button {
+	background: url(images/button-gradient.png);
+	border: 1px solid #999;
+	border-top: 1px solid #e0e0e0;
+	border-left: 1px solid #e0e0e0;
+	margin: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 29px;
+	min-width: 70px;
+}
+
+button:active {
+  border-left: 1px solid #c9c9c9;
+  border-top: 1px solid #c9c9c9;
+  background: none;
+  background-color: #c9c9c9;
+}
+
+button[disabled] {
+  background: url(zen-button.png);
+  border: 1px solid #999;
+  border-top: 1px solid #e0e0e0;
+  border-left: 1px solid #e0e0e0;
+  cursor: not-allowed;
+}
+
+/**
+## Experiment-specific styles
+This stuff will vary by experiment.
+*/
+
+#logo-text {
+  font-weight: bold;
+}
+
+#welcome {
+  text-align: center;
+}
+
+#instructions1 {
+  text-align: center;
+}
+
+#instructions2 {
+  text-align: center;
+}
+
+#training1 {
+
+}
+
+#training2 {
+
+}
+
+#loading {
+	text-align: center;
+	font-size: 40px;
+	font-family:Courier;
+	color:green;
+	position:relative;
+	top:30%;
+	bottom:30%;
+}
+
+#ready {
+	text-align: center;
+	font-size: 40px;
+	font-family:Courier;
+	color:green;
+	position:relative;
+	top:30%;
+	bottom:30%;
+}
+
+#finish {
+	text-align: center;
+}
+
+.block-text {
+  width: 500px;
+  text-align: justify;
+  margin: 0 auto;
+  margin-bottom: 1em;
+}
+
+.later-block {
+	width: 750px;
+	text-align: justify;
+	margin: 0 auto;
+	margin-bottom: 1em;
+}
+
+.later-block-center {
+	width: 1000px;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 1em;
+}
+
+table.wrapper {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	width:100%;
+}
+
+table#practiceTable1 {
+	border-collapse: collapse;
+	border:1px solid #aabcfe;
+	width:100%;
+}
+
+table#practiceTable2 {
+	border-collapse: collapse;
+	border:1px solid #aabcfe;
+	width:100%;
+}
+
+table#realTable {
+	border-collapse: collapse;
+	border:1px solid #668E39;
+	width:100%;
+}
+
+#before {
+	height:100%;
+}
+
+#after {
+	height:100%;
+}
+
+#practiceTable1 tr:hover td.light {
+	background: #d0dafd;
+	color: black;
+}
+
+#practiceTable2 tr:hover td.light {
+	background: #d0dafd;
+	color: black;
+}
+
+#realTable tr:hover td.light {
+	background: #96B566;
+	color: black;
+}
+
+#practiceTable1 tr:hover td.dark {
+	background: #d0dafd;
+	color: black;
+}
+
+#practiceTable2 tr:hover td.dark {
+	background: #d0dafd;
+	color: black;
+}
+
+#realTable tr:hover td.dark {
+	background: #96B566;
+	color: black;
+}
+
+#practiceTable1 th {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 20px;
+	text-align: center;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe;
+	border-bottom: 1px solid #b9c9fe;
+	color: white;
+}
+
+#practiceTable2 th {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 20px;
+	text-align: center;
+	font-weight: normal;
+	padding: 8px;
+	background: #b9c9fe;
+	border-bottom: 1px solid #b9c9fe;
+	color: white;
+}
+
+#realTable th {
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+	font-size: 20px;
+	text-align: center;
+	font-weight: normal;
+	padding: 8px;
+	background: #668E39;
+	border-bottom: 1px solid #668E39;
+	color: white;
+}
+
+p.boring {
+	font-size: 16px;
+	padding:4px;
+	vertical-align:bottom;
+}
+
+p#utterance {
+	font-size: 18px;
+	padding:4px;
+	vertical-align:bottom;
+}
+
+p#utterancePractice {
+	font-size: 18px;
+	padding:4px;
+	vertical-align:bottom;
+}
+
+td.dark, td.light, th {
+  border-collapse: collapse;
+}
+
+#practiceTable1 td.dark {
+  margin-bottom: 40px;
+  background-color: #e8edff;
+}
+
+#practiceTable2 td.dark {
+  margin-bottom: 40px;
+  background-color: #e8edff;
+}
+
+#realTable td.dark {
+  margin-bottom: 40px;
+  background-color: #BCE27F;
+}
+
+td.light {
+
+}
+
+#realTable td.input {
+	border-top: 1px solid #668E39;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	text-align: center;
+}
+
+#practiceTable1 td.input {
+	border-top: 1px solid #aabcfe;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	text-align: center;
+}
+
+#practiceTable2 td.input {
+	border-top: 1px solid #aabcfe;
+	border-left: 1px solid #fff;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	text-align: center;
+}
+
+td.next {
+	border: 1px solid #fff;
+	text-align: center;
+}
+
+#legal {
+  margin: 0 auto;
+  margin-top: 1.5em;
+  font-size: 0.8em;
+}
+
+#labelInst {
+	text-align: center;
+}
+
+#defReminder {
+	text-align: left;
+	width: 400px;
+	font-size: .8em;
+}
+
+.feedbackQuestions {
+	width: 600px;
+}
+
+
+

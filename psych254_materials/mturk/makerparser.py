@@ -20,14 +20,15 @@ import pprint
 #######################################################
 #Lists and constants to be used throughout the script##
 #######################################################
-syntax_types = [" no ","\tno "," no: ","\tno: "," oh+no ","\toh+no "," not ","\tnot ","n't "]
-neg_categories = ["ASSERTIVE","DIRECTIVE","OTHER/UNCLEAR","REPEAT"]
-category_abbreviations = ["A","D","X","R"]
-noncritical_ages = ["1;1","1;2","1;3","1;4","1;5","1;6","1;7","1;8","1;9","1;10","1;11","1;12","2;0","2;1","2;2","2;3","2;4","2;5"]
-labels = neg_categories + category_abbreviations
-indexes = ["line.number","is.tagged","filename","age","before1","before2","before3","before4","before5","before6","before7","before8","before9","before10","utterance","after1","after2","after3"]
-curr_limit = 20
-child_marker = '*CHI:'
+file_dir = 'target-materials/active-passive.txt'
+active_passive1 = ["1AP","2AI","3PI","4PP","5AP","6AI","7PI","8PP","9AP","10AI","11PI","12PP","13AP","14AI","15PI","16PP","17AP","18AI","19PI","20PP"]
+active_passive2 = ["2AP","3AI","4PI","5PP","6AP","7AI","7PI","9PP","10AP","11AI","12PI","13PP","14AP","15AI","16PI","17PP","18AP","19AI","20PI","1PP"]
+active_passive3 = ["3AP","4AI","5PI","6PP","7AP","8AI","9PI","10PP","11AP","12AI","13PI","14PP","15AP","16AI","17PI","18PP","19AP","20AI","1PI","2PP",]
+active_passive4 = ["4AP","5AI","6PI","7PP","8AP","9AI","10PI","11PP","12AP","13AI","14PI","15PP","16AP","17AI","18PI","19PP","20AP","1AI","2PI","3PP",]
+latin_square_ap = [active_passive1,active_passive2,active_passive3,active_passive4]
+headers = ["alternation","utterance","question","alt_tag","item_number","correct"]
+
+
 out_directory_pre = 'turkerTrials/langcog_negsearch_mturk_database'
 out_directory_post = '.csv'
 escape_char = re.compile(r'\w+_\w+')
@@ -45,95 +46,20 @@ def restart_line():
 	return None
 
 def get_filepaths():
-	directory_general = sys.path[0] + "/" + "Providence/"
+	directory_general = sys.path[0]
+	directory_general = os.path.join(directory_general,file_dir)
 	print "directory is: " + directory_general
 	return directory_general
 
-def create_directories(directory_general):
-	folder_list = []
-	for folder in os.listdir(directory_general):
-		if ('metadata' in folder):
-			pass
-		elif ('.DS_Store' in folder):
-			pass
-		else:
-			filepath = os.path.join(directory_general, folder)
-			folder_list.append(filepath)
-	print "create_directories success!"
-	return folder_list
-
-def read_chat_files(directory_general):
-	folder_list = create_directories(directory_general)
+def read_stimulus_file(directory_general):
 	data_list = []
-	utterance_list = []
-	speech_marker = '*'
-	for folder in folder_list: #iterates through the children's folder
-		for filename in os.listdir(folder): #iterates through each chat file in the folder
-			filepath = os.path.join(folder, filename)
-			if filepath.endswith(".cha"): #checks it's a chat file
-				text = open(filepath, "r") #opens the chat file
-				j = 0
-				age_utterance_pair = []
-				for index in range(5):
-					next_line = text.next()
-				age = re.search('providence\|CHI\|(.+?)\|', next_line).group(1)
-				for each_line in text: #iterates through each line in the file
-					if speech_marker in each_line: #exclude phonetic lines
-						j_string = str(j)
-						line = str(filename + " " + age + " " + j_string + " " + each_line)
-						utterance_list.append(line) #adds the line to our list of data
-						j = j+1
-				text.close() #closes the current chat file
-	print "size of utterance list is " + str(len(utterance_list))
-	k = 0
-	for utterance in utterance_list: #iterates through our list of every line in the files
-		if any(neg in utterance for neg in syntax_types):
-			if child_marker in utterance:
-				utterance_index = utterance_list.index(utterance)
-				utterance = utterance.strip(' ')
-				which_file = utterance.split(' ',2)[0]
-				child_age = utterance.split(' ',2)[1]
-				utterance = utterance.split(' ',2)[2]
-				try:
-					before_line_1 = utterance_list[utterance_index - 1].strip(' ').split(' ',2)[2] #line at j - 1
-					before_line_2 = utterance_list[utterance_index - 2].strip(' ').split(' ',2)[2] #line at j - 1
-					before_line_3 = utterance_list[utterance_index - 3].strip(' ').split(' ',2)[2] #line at j - 1
-					before_line_4 = utterance_list[utterance_index - 4].strip(' ').split(' ',2)[2] #line at j - 1
-					before_line_5 = utterance_list[utterance_index - 5].strip(' ').split(' ',2)[2] #line at j - 5
-					before_line_6 = utterance_list[utterance_index - 6].strip(' ').split(' ',2)[2] #line at j - 6
-					before_line_7 = utterance_list[utterance_index - 7].strip(' ').split(' ',2)[2] #line at j - 7
-					before_line_8 = utterance_list[utterance_index - 8].strip(' ').split(' ',2)[2] #line at j - 8
-					before_line_9 = utterance_list[utterance_index - 9].strip(' ').split(' ',2)[2] #line at j - 9
-					before_line_10 = utterance_list[utterance_index - 10].strip(' ').split(' ',2)[2] #line at j - 10
-				except IndexError: #if there is no line before, doesn't go looking for context
-					before_line_1 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					before_line_2 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					before_line_3 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					before_line_4 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					before_line_5 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					before_line_6 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					before_line_7 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					before_line_8 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					before_line_9 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					before_line_10 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-				instance = [which_file, child_age, before_line_10, before_line_9, before_line_8, before_line_7, before_line_6]
-				instance.extend([before_line_5, before_line_4, before_line_3, before_line_2, before_line_1, utterance])
-				try:
-					after_line_1 = utterance_list[utterance_index + 1].strip(' ').split(' ',2)[2] #line at j + 1
-					after_line_2 = utterance_list[utterance_index + 2].strip(' ').split(' ',2)[2] #line at j + 2
-					after_line_3 = utterance_list[utterance_index + 3].strip(' ').split(' ',2)[2] #line at j + 3
-				except IndexError: #if there is no line after, doesn't go looking for context
-					after_line_1 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					after_line_2 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-					after_line_3 = utterance_list[utterance_index].strip(' ').split(' ',2)[2]
-				instance.extend([after_line_1, after_line_2, after_line_3])
-				instance = [clean_utterance(item) for item in instance]
-				data_list.append(instance)
-		k = k + 1
-		outputstring = "Working on it! There are " + str(len(utterance_list) - k) + " utterances left"
-		sys.stdout.write(outputstring)
-		sys.stdout.flush()
-		restart_line()
+	filepath = create_directories(directory_general)
+	text = open(filepath, "r")
+
+	outputstring = "Working on it! There are " + str(len(utterance_list) - k) + " utterances left"
+	sys.stdout.write(outputstring)
+	sys.stdout.flush()
+	restart_line()
 	print "data_list officially created of size " + str(len(data_list))
 	return data_list
 
@@ -211,30 +137,6 @@ def trim_data(data_list):
 			almostcleaned_df.append(data_row)
 			#if not any(age in age_cell for age in noncritical_ages):
 				#almostcleaned_df.append(data_row)
-	'''
-	for data_row in almostcleaned_df:
-		name = data_row[name_index]
-		if "ale" in name:
-			if alex_counter < curr_limit:
-				cleaned_df.append(data_row)
-			alex_counter = alex_counter + 1
-		if "lil" in name:
-			if lily_counter < curr_limit:
-				cleaned_df.append(data_row)
-			lily_counter = lily_counter + 1
-		if "nai" in name:
-			if naima_counter < curr_limit:
-				cleaned_df.append(data_row)
-			naima_counter = naima_counter + 1
-		if "vio" in name:
-			if violet_counter < curr_limit:
-				cleaned_df.append(data_row)
-			violet_counter = violet_counter + 1
-		if "wil" in name:
-			if william_counter < curr_limit:
-				cleaned_df.append(data_row)
-			william_counter = william_counter + 1'''
-	print "data trimmed for current preferences"
 	return almostcleaned_df
 
 def augment_data_list(data_list):
@@ -285,8 +187,8 @@ def write_data_to_csv(data_list,num):
 def main():
 	raw_input("Ready to go?")
 	directory_general = get_filepaths()
-	data_list = read_chat_files(directory_general)
-	#glean_info(data_list) only if you want negations put out separately
+	data_list = read_stimulus_file(directory_general)
+
 	data_list = trim_data(data_list) #takes ethan out
 	print "data trimmed for current preferences (no ethan else all): size = " + str(len(data_list))
 	data_list = augment_data_list(data_list)
