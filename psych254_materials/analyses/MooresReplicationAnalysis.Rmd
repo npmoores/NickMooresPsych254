@@ -1,0 +1,157 @@
+Nick Moores -- Gibson et al. Replication Analysis
+========================================================
+
+First I load necessary packages.
+```{r loadpackages}
+#clear all previous variables
+rm(list=ls())
+
+#load libraries for data manipulation and graphing
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(lme4)
+library(lmerTest)
+```
+
+I define some helpful functions!
+```{r helperfunctions}
+#some useful functions for computing measurement error
+sem <- function(x) {sd(x)/sqrt(length(x))}
+ci95 <- function(x) {3.96*sem(x)}
+```
+
+and read in the data
+```{r readdata}
+d <- data.frame() #initializes df var
+files <- dir("../data/ResultsCSVs/",pattern="*.csv")
+
+for (f in files) { #iterates through folder
+  df <- read.csv(paste("../data/ResultsCSVs/",
+                       f,sep=""))
+  d <- rbind(d, df) #constructs master dataframe
+}
+d <- tbl_df(d)
+glimpse(d)
+```
+
+and clean it up, adding in whether they relied on syntax, `correct`:
+```{r cleandata}
+ds <- distinct(d)
+ds <- ds %>% select(one_of(c("subjectID","alternation", "alt_tag","question", "utterance", "syntax_interpretation","answer")))
+ds$syntax_interpretation <- as.character(ds$syntax_interpretation)
+ds$answer <- as.character(ds$answer)
+ds$alt_tag <- as.character(ds$alt_tag)
+ds$alternation <- as.character(ds$alternation)
+ds$subjectID <- as.character(ds$subjectID)
+ds <- filter(ds, syntax_interpretation == "Yes" | syntax_interpretation == "No") %>% filter(answer == "Yes" | answer == "No") %>% filter(alt_tag != "alt_tag") %>% filter(alternation != "alternation") %>% filter(subjectID != "subjectID") %>% filter(alternation != "filler")
+ds <- mutate(ds, reliedOnSyntax = ds$syntax_interpretation==ds$answer)
+```
+
+I now separate the data into separate dataframes for analysis of each sub-experiment
+```{r parse_alt_tags}
+ds <- ds %>% mutate(alt_tag = gsub("[0-9]","",alt_tag))
+ds_act <- ds %>% filter(alternation=="active/passive")
+glimpse(ds_act)
+ds_loc <- ds %>% filter(alternation=="locInversion")
+glimpse(ds_loc)
+ds_trans <- ds %>% filter(alternation=="trans/intrans")
+glimpse(ds_trans)
+```
+
+I now parse the alt_tag values back into plausible/implausible and which alternation they were
+```{r construct_dfs}
+ds_act <- ds_act %>% mutate(valence = alt_tag) %>% mutate(plausibility = alt_tag) %>% mutate(valence = gsub("AP","Active",valence)) %>% mutate(valence = gsub("AI","Active",valence)) %>% mutate(valence = gsub("PP","Passive",valence)) %>% mutate(valence = gsub("PI", "Passive",valence)) %>% mutate(plausibility = gsub("AP","Plausible",plausibility)) %>% mutate(plausibility = gsub("PP","Plausible",plausibility)) %>% mutate(plausibility = gsub("AI","Implausible",plausibility)) %>% mutate(plausibility = gsub("PI", "Implausible", plausibility))
+
+ds_loc <- ds_loc %>% mutate(valence = alt_tag) %>% mutate(plausibility = alt_tag) %>% mutate(valence = gsub("PO","Object",valence)) %>% mutate(valence = gsub("IO","Object",valence)) %>% mutate(valence = gsub("PS","Subject",valence)) %>% mutate(valence = gsub("IS", "Subject",valence)) %>% mutate(plausibility = gsub("PO","Plausible",plausibility)) %>% mutate(plausibility = gsub("PS","Plausible",plausibility)) %>% mutate(plausibility = gsub("IO","Implausible",plausibility)) %>% mutate(plausibility = gsub("IS", "Implausible", plausibility))
+
+ds_trans <- ds_trans %>% mutate(valence = alt_tag) %>% mutate(plausibility = alt_tag) %>% mutate(valence = gsub("TP","Transitive",valence)) %>% mutate(valence = gsub("TI","Transitive",valence)) %>% mutate(valence = gsub("PP","Intransitive",valence)) %>% mutate(valence = gsub("PI", "Intransitive",valence)) %>% mutate(plausibility = gsub("TP","Plausible",plausibility)) %>% mutate(plausibility = gsub("PP","Plausible",plausibility)) %>% mutate(plausibility = gsub("PI","Implausible",plausibility)) %>% mutate(plausibility = gsub("TI", "Implausible", plausibility))
+```
+
+Now I convert my values back to factors so they can plot correctly
+```{r convert_to_factor}
+ds$syntax_interpretation <- factor(ds$syntax_interpretation)
+ds$answer <- factor(ds$answer)
+ds$alt_tag <- factor(ds$alt_tag)
+ds$alternation <- factor(ds$alternation)
+ds$subjectID <- factor(ds$subjectID)
+
+ds_act$syntax_interpretation <- factor(ds_act$syntax_interpretation)
+ds_act$answer <- factor(ds_act$answer)
+ds_act$alt_tag <- factor(ds_act$alt_tag)
+ds_act$alternation <- factor(ds_act$alternation)
+ds_act$subjectID <- factor(ds_act$subjectID)
+ds_act$valence <- factor(ds_act$valence)
+ds_act$plausibility <- factor(ds_act$plausibility)
+
+ds_loc$syntax_interpretation <- factor(ds_loc$syntax_interpretation)
+ds_loc$answer <- factor(ds_loc$answer)
+ds_loc$alt_tag <- factor(ds_loc$alt_tag)
+ds_loc$alternation <- factor(ds_loc$alternation)
+ds_loc$subjectID <- factor(ds_loc$subjectID)
+ds_loc$valence <- factor(ds_loc$valence)
+ds_loc$plausibility <- factor(ds_loc$plausibility)
+
+ds_trans$syntax_interpretation <- factor(ds_trans$syntax_interpretation)
+ds_trans$answer <- factor(ds_trans$answer)
+ds_trans$alt_tag <- factor(ds_trans$alt_tag)
+ds_trans$alternation <- factor(ds_trans$alternation)
+ds_trans$subjectID <- factor(ds_trans$subjectID)
+ds_trans$valence <- factor(ds_trans$valence)
+ds_trans$plausibility <- factor(ds_trans$plausibility)
+
+glimpse(ds_act)
+glimpse(ds_loc)
+glimpse(ds_trans)
+```
+
+I recombine the dataframes
+```{r recombine}
+ds_graph <- bind_rows(ds_act, ds_loc)
+ds_graph <- bind_rows(ds_graph, ds_trans)
+ds_graph$subjectID <- factor(ds_graph$subjectID)
+ds_graph$alternation <- factor(ds_graph$alternation)
+ds_graph$alt_tag <- factor(ds_graph$alt_tag)
+ds_graph$valence <- factor(ds_graph$valence)
+
+ds_model <- ds_graph #save for later WITH plausibility
+ds_graph$plausibility <- as.character(ds_graph$plausibility)
+ds_graph <- ds_graph %>% filter(plausibility == "Implausible")
+ds_graph$plausibility <- factor(ds_graph$plausibility)
+glimpse(ds_graph)
+```
+
+I now aggregate the results for the active/passive alternation and graph
+```{r graph_overall_results}
+quartz()
+plot.style <- theme(panel.grid.major=element_blank(), legend.position="right", plot.title=element_text(face="bold", size=14), axis.title=element_text(size=12))
+PD <- position_dodge(.9)
+correct <- aggregate(reliedOnSyntax ~ alternation + valence, ds_graph, mean)
+correct.sd <- aggregate(reliedOnSyntax ~ alternation + valence, ds_graph, sd)
+correct.SEM <- aggregate(reliedOnSyntax ~ alternation + valence, ds_graph, sem)
+correct$SEM <- correct.SEM[,3]
+qplot(alternation, reliedOnSyntax, fill=valence, #plot bar graph with aggregated corrects dataframe
+      geom="bar",
+      position="dodge",
+      stat="identity",
+      data=correct) +
+  geom_errorbar(aes(ymin=reliedOnSyntax-SEM, ymax=reliedOnSyntax+SEM), colour="black", width=.2, position=PD) +
+  xlab("Syntax Alternation") +
+  ylab("Proportion Reliance on Syntax (mean)") +
+  ggtitle("Proportion Reliance on Syntax For Implausible Sentences") +
+  scale_fill_discrete(name="Alt\nType") +
+  plot.style+
+  geom_text(aes(2.0,0.99,label="***"),colour="black",size=5) + 
+  geom_text(aes(0.9,0.99,label="**"),colour="black",size=5) +
+  geom_text(aes(1.45,0.99,label="n.s."),colour="black",size=5) +
+  geom_text(aes(2.5,0.80,label="***"),colour="black",size=5) +
+  geom_segment(aes(x=1.2, y=0.93, xend=1.7, yend=0.93)) +
+  geom_segment(aes(x=2.3, y=0.78, xend=2.7, yend=0.78))
+```
+
+Mixed model analysis
+```{r mixedmodels}
+syntax.mixed.model <- glmer(reliedOnSyntax ~ alternation + plausibility + valence + (1|subjectID) + (1|utterance), data=ds_model, family=binomial, na.action=na.omit) 
+summary(syntax.mixed.model)
+```
+

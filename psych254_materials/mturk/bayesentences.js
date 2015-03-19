@@ -26,7 +26,7 @@ var numTrials = 60; //governs the number of trials in the experiment
 var subjectID = turk.workerId;
 var data;
 var decision;
-var inputfilepath = "ActivePassiveList1.csv";
+var inputfilepath = "LocativeList4.csv";
 var counter = '/60 trials completed';
 var numCSVRows = 61;
 var pauseTime = 500; //governs the animation look
@@ -163,10 +163,9 @@ function submitData(expdata) {
 		result_file_path: outfilepath,
 		postresult_array: experiment_result_array,
 	}); //posts the results to the server using php
-	// experiment.end(); //calls the experiment's end function
-	/*$.when(submiter).then(function() {
+	$.when(submiter).then(function() {
 		turk.submit(expdata, true); //submits demo data to turk
-	});*/
+	});
 	return;
 }
 
@@ -211,12 +210,12 @@ var experiment = { //var containing the experiment, though everything is called 
 			$("#radioPractice1").buttonset()
 		});
 
-		$('#nextTraining1').on('click', function(event) {
+		$('#yesPractice1, #noPractice1').on('click', function(event) {
 			showSlide("training2");
 			$("#radioPractice2").buttonset()
 		});
 
-		$('#nextTraining2').on('click', function(event) {
+		$('#yesPractice2, #noPractice2').on('click', function(event) {
 			experiment.next(data);
 		});
 	}, //finishes declaration of training method
@@ -243,7 +242,6 @@ var experiment = { //var containing the experiment, though everything is called 
 			$("#radioNext").buttonset()
 		}, pauseTime * 4);
 		var trial_result_array = []; //initializes result_string variable that will hold the result of each trial, to be parsed later
-		var result_headers = ["subjectID", "list_number", "alternation","item_number", "utterance", "question", "alt_tag", "syntax_interpretation", "day", "time"];
 		var subjID = 0;
 		var list_number = 1;
 		var alternation = 2;
@@ -255,8 +253,8 @@ var experiment = { //var containing the experiment, though everything is called 
 		var answer = 8;
 		var day = 9;
 		var time = 10;
-		$('#next').on('click', function(event) {
-			var decision = $('input[name=radioNext]:checked', '#radioNext').val()
+		$('#yes, #no').on('click', function(event) {
+			var decision = $(this).val()
 			console.log(decision)
 			if (decision == undefined) { //user didn't pick anything! Silly user...
 				alert("What happened in the sentence? Please make a selection!");
@@ -325,7 +323,7 @@ var experiment = { //var containing the experiment, though everything is called 
 	end: function() { //governs how the experiment will end
 		showSlide("finish"); //shows the 'finish' slide from the html file
 		console.log(experiment_result_array);
-		submitData(experiment)
+		submitData(experiment_result_array);
 			// setTimeout(function() {
 			// 	turk.submit(experiment, true);
 			// }, 1500);

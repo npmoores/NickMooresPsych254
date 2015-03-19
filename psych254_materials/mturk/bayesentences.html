@@ -3,7 +3,7 @@
     <title>Oh No He Didn't!</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.js"></script>
-    <script src="mmturkey.js"></script>
+    <script src="mmturkey.js"></script> 
     <link rel="stylesheet" href="style.css" />
     <meta name="viewport" content="initial-scale=1.0" />
   </head>
@@ -45,12 +45,11 @@
           </table></td>
         <tr align="center"><td align="center">
           <div id="radioPractice1">
-            <input type="radio" id="yesPractice1" name="radioPractice1" value="Yes"><label for="yes" >Yes</label>
+            <button class="practiceButton1" type="submit" id="yesPractice1" name="radioPractice1" onClick="this.blur();" value="Yes"><label for="yes" >Yes</label>
             <br>
-            <input type="radio" id="noPractice1" name="radioPractice1" value="No"><label for="no" >No</label>
+            <button class="practiceButton1" type="submit" id="noPractice1" name="radioPractice1" onClick="this.blur();"value="No"><label for="no" >No</label>
             <br>
           </div>
-        <div class="nextButton"><button id="nextTraining1" type="button" onClick="this.blur();">Next</button></div>
       </td></tr>
       </table>
     </div>
@@ -65,12 +64,11 @@
           </table></td></tr>
         <tr align="center"><td align="center">
           <div id="radioPractice2">
-            <input type="radio" id="yesPractice2" name="radioPractice2" value="Yes"><label for="yes" >Yes</label>
+            <button class="practiceButton2" type="submit" id="yesPractice2" name="radioPractice2" onClick="this.blur();" value="Yes"><label for="yes" >Yes</label>
             <br>
-            <input type="radio" id="noPractice2" name="radioPractice2" value="No"><label for="no" >No</label>
+            <button class="practiceButton2" type="submit" id="noPractice2" name="radioPractice2" onClick="this.blur();" value="No"><label for="no" >No</label>
             <br>
           </div>
-        <div class="nextButton"><button id="nextTraining2" type="button" onClick="this.blur();">Next</button></div>
       </td></tr>
       </table>
     </div>
@@ -93,12 +91,11 @@
           </table></td></tr>
         <tr align="center"><td align="center">
           <div id="radioNext">
-            <input type="radio" id="yes" name="radioNext" value="Yes"><label for="yes" >Yes</label>
+            <button class="nextButton" type="submit" id="yes" name="radioNext" value="Yes"><label for="yes" >Yes</label>
             <br>
-            <input type="radio" id="no" name="radioNext" value="No"><label for="no" >No</label>
+            <button class="nextButton" type="submit" id="no" name="radioNext" value="No"><label for="no" >No</label>
             <br>
           </div>
-        <div class="nextButton"><button id="next" type="button" onClick="this.blur();">Next</button></div>
       </td></tr>
       </table>
 

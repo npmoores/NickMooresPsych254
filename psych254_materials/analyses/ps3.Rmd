@@ -1,0 +1,397 @@
+---
+title: 'Psych 254 W15 PS #3'
+author: "Mike Frank"
+date: "February 22, 2015"
+output: html_document
+---
+
+This is problem set #3, in which we want you to integrate your knowledge of data wrangling with some basic simulation skills and some linear modeling.
+
+```{r imports}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(lme4)
+library(lmerTest)
+```
+
+Part 1: Basic simulation and NHST
+=================================
+
+Let's start by convincing ourselves that t-tests have the appropriate false positive rate. Run 10,000 t-tests with standard, normally-distributed data from a made up 30-person, single-measurement experiment (the command for sampling from a normal distribution is `rnorm`). What's the mean number of "significant" results?
+
+First do this using a `for` loop.
+
+```{r basicsimulation}
+n.obs <- 30
+n.samps <- 10000
+resample <- function(n.obs, n.samps) {
+sample.array <- array(dim=n.samps)
+for (i in 1:n.samps) {
+  x <- rnorm(n.obs)
+	sample.array[i] <- t.test(x)$p.val < .05
+}
+return(mean(sample.array))
+}
+resample(n.obs, n.samps)
+```
+
+Next, do this using the `replicate` function:
+
+```{r replicate}
+results <- replicate(n.samps, resample(n.obs, 1) , simplify="FALSE")
+mean(results)
+```
+
+Ok, that was a bit boring. Let's try something moderately more interesting - let's implement a p-value sniffing simulation, in the style of Simons, Nelson, & Simonsohn (2011).
+
+Consider this scenario: you have done an experiment, again with 30 participants (one observation each, just for simplicity). The question is whether their performance is above chance. You aren't going to check the p-value every trial, but let's say you run 30 - then if the p-value is within the range p < .25 and p > .05, you optionally run 30 more and add those data, then test again. But if the original p value is < .05, you call it a day, and if the original is > .25, you also stop.  
+
+First, write a function that implements this sampling regime.
+
+```{r doublesample}
+n.obs <- 30
+double.sample <- function (n.obs) {
+  sample.array <- array(dim=n.obs)
+  upper.sniff.array <- array(dim=n.obs)
+for (i in 1:n.obs) {
+  x <- rnorm(n.obs)
+  sample.array[i] <- t.test(x)$p.val
+}
+if (sample.array[n.obs] > .25) {
+  return(sample.array[n.obs])
+} else if (sample.array[n.obs] < .05) {
+  return(sample.array[n.obs])
+} else {
+  return(double.sample(n.obs))
+}
+}
+double.sample(n.obs)
+```
+
+Now call this function 10k times and find out what happens. 
+
+```{r doublesampleadinfinitum}
+results <- replicate(n.samps, double.sample(n.obs) , simplify="FALSE")
+mean(results)
+```
+
+Is there an inflation of false positives? How bad is it?
+
+Now modify this code so that you can investigate this "double the sample" rule in a bit more depth. Let's see what happens when you double the sample ANY time p > .05 (not just when p < .25), or when you do it only if p < .5 or < .75. How do these choices affect the false positive rate?
+
+HINT: Try to do this by making the function `double.sample` take the upper p value as an argument, so that you can pass this through dplyr.
+
+HINT 2: You may need more samples. Find out by looking at how the results change from run to run.
+
+```{r doublesampleagain}
+n.obs <- 30
+upper <- .5
+double.resample <- function (n.obs) {
+  sample.array <- array(dim=n.obs)
+for (i in 1:n.obs) {
+  x <- rnorm(n.obs)
+  sample.array[i] <- t.test(x)$p.val
+if (sample.array[i] > .05) {
+  return(double.resample(n.obs))
+  } else {
+  return(sample.array[i])
+  } 
+}
+}
+
+double.resample.with.upper <- function (n.obs, upper.val) {
+  sample.array <- array(dim=n.obs)
+for (i in 1:n.obs) {
+  x <- rnorm(n.obs)
+  sample.array[i] <- t.test(x)$p.val
+if (sample.array[i] < upper.val) {
+  return(double.resample.with.upper(n.obs, upper.val))
+  } else {
+  return(sample.array[i])
+  } 
+}
+}
+
+double.resample(n.obs) #double the sample any time p > .05
+
+upper <- .5
+double.resample.with.upper(n.obs, upper) #resample any time p is greater than the upper param
+upper <- .75
+double.resample.with.upper(n.obs, upper) #resample any time p is greater than the upper param
+```
+
+What do you conclude on the basis of this simulation? How bad is this kind of data-dependent policy?
+
+On the basis of this simulation, I conclude that this simulation is highly unreliable, making this terrible policy.
+
+Part 2: The Linear Model
+========================
+
+2A: Basic Linear Modeling
+-------------------------
+
+Let's use the `ToothGrowth` dataset, on guineapig teeth based on orange juice
+and vitamin C. This is super simple. (Try `?ToothGrowth`).
+
+First plot the data, we'll use `qplot` to understand how `len` (tooth length) depends on `dose` (amount of Vitamin C) and `supp` (delivery method).
+
+```{r qplotfun}
+qplot(dose, len, data=ToothGrowth, geom='point', color=supp, facets = ~ supp) +
+  ggtitle("Tooth length by dose of Vitamin C and delivery method") +
+  xlab("Dose of Vitamin C") + ylab("Tooth Length")
+```
+
+So now you see what's going on. 
+
+Next, always make a histogram of the DV before making a linear model! This reveals the distribution and can be helpful in choosing your model type.
+
+```{r linearmodel}
+m.rt <- exp(mean(log(ToothGrowth$len),na.rm=TRUE)) #take log average of RT: average natural logs of RTs, then take the exponential of that
+sd.rt <- exp(sd(log(ToothGrowth$len),na.rm=TRUE)) #geometric standard deviation: exponentiated value of the standard deviation of the log-transformed values
+qplot(len, data=ToothGrowth) + 
+  geom_vline(xintercept=m.rt + 2*sd.rt, col="red", lty=2) + #lets us view how much is spread 2 SDs above mean
+  geom_vline(xintercept=m.rt - 2*sd.rt, col="red", lty=2) + #lets us view how much is spread 2 SDs below mean
+  xlab("Tooth Growth Distribution") +
+  ylab("Frequency") +
+  ggtitle("Tooth Growth Histogram (marking +/- 2 SDs)")
+```
+
+Now make a linear model of tooth lengths using `lm`. Try making one with main effects and interactions and another with just main  effects. Make sure to assign them to variables so that you can get them later.
+
+```{r comparativeGLMs}
+ints_lm <- lm(len ~ dose*supp, data = ToothGrowth)
+summary(ints_lm)
+
+no.ints_lm <- lm(len ~ dose + supp, data = ToothGrowth)
+summary(no.ints_lm)
+```
+
+Now try taking out the intercept, using a -1 term in the formula. what does this do?
+
+```{r modifyintercept}
+no.intercept_lm <- lm(len ~ -1 + dose * supp, data = ToothGrowth)
+summary(no.intercept_lm)
+
+interaction.plot(ToothGrowth$dose, ToothGrowth$supp, ToothGrowth$len, lty=c(1,2), lwd=2, ylab='Tooth Length', xlab='Vitamin C Dose', trace.label='Supplement')
+```
+Taking out the intercept causes each of the regressors in the model to become very significant, for each level of `supp` as well.
+
+Thought question: Take a moment to interpret the coefficients of the model. 
+Q1 - What are the units?
+Vitamin C doses are measured in milligrams; tooth length is measured in millimeters.
+Q2 - How does the interaction relate to the plot?
+The significant interaction between dose and supplement type manifests in such a way that for sufficiently high doses of Vitamin C (about 2 mg), tooth length does not differ due to given supplement type, but that at lower doses, guinea pigs that receive the supplement OJ have higher tooth lengths than guinea pigs who receive the supplement VC.
+Q3 - Should there be an interaction in the model? What does it mean? How important is it?
+I would argue that there should be an interaction in the model, since this model explains a high amount of variance in tooth length (Multiple R-squared = 0.73), and the supplement type influences tooth length differently at different doses.
+
+Now make predictions from the model you like the best. What should happen with
+doses of 0, 1.5, 2.5, and 10 under both supplements? 
+
+Higher doses should yield higher tooth lengths!
+
+HINT: use the `predict` function ...
+
+HINT 2: you will have to make a dataframe to do the prediction with, so use something like `data.frame(dose=...)`.
+
+```{r predictions}
+tooth.df <- data.frame(dose=ToothGrowth$dose, supp=ToothGrowth$supp, len=ToothGrowth$len)
+plot(predict(ints_lm, tooth.df))
+```
+
+Now plot the residuals from the original model. How do they look?
+
+The residuals look quite messy.
+
+HINT: `?resid`
+
+```{r residuals}
+residuals <- resid(no.ints_lm)
+plot(residuals)
+```
+
+
+BONUS: test them for normality of distribution using a quantile-quantile plot.
+
+HINT: `?qqplot` and `?qqnorm`
+
+```{r qqplot}
+qqnorm(residuals)
+```
+The residuals are somewhat normally distributed.
+
+2B: Exploratory Linear Modeling
+-------------------------------
+
+What the heck is going on? Load data from Frank, Vul, Saxe (2011, Infancy), a study in which we measured infants' looking to hands in moving scenes. There were infants from 3 months all the way to about two years, and there were two movie conditions (`Faces_Medium`, in which kids played on a white background, and `Faces_Plus`, in which the backgrounds were more complex and the people in the videos were both kids and adults). Forgive our bad naming conventions.
+
+Try to figure out what the most reasonable linear model of the data is.
+
+```{r explore}
+d <- read.csv("../data/FVS2011-hands.csv")
+hand.lm <- lm(hand.look ~ age + condition, data = d)
+summary(hand.lm)
+```
+In a simple additive model of the data, we see that both age and condition are significant predictors of children's hand looking.
+
+Plot that model on the same plot as the data.
+
+HINT: you can do this either using `predict` or (if you are feeling confident of your understanding of the models) using the built-in linear models in `ggplot`'s `geom_smooth`. 
+
+```{r plotmodelanddata}
+ggplot(d, aes(x=age, y=hand.look)) +
+  ggtitle("Children's Hand Looking by Age") +
+  xlab("Child Age") + ylab("Hand Looking") + 
+    geom_point(shape=16, 
+               color = 'black',
+               alpha = 0.5) +
+  geom_smooth(method=lm, color = 'red')
+```
+
+What do you conclude from this pattern of data?
+
+The data is quite noisy, and it's hard to draw clear conclusions from it, though a major trend in the data is that as children age they tend to look more at the hands in the scenes.
+
+3: Linear Mixed Effect Models
+=============================
+
+The goal here is to learn to use LMEMs using `lme4` and to compare them to
+standard by subject, by item LMs, as well as the standard (no repeated measures) fixed effects GLM.
+
+The dataset here is from Stiller, Goodman, & Frank (2014), a paper on children's pragmatic inferences. We saw the paradigm in the counterbalancing lecture: it's three faces: a smiley, a smiley with glasses, and a smiley with a hat and glasses. When told "my friend has glasses" do kids pick the one with the glasses and no hat? `age.group` is the kids' age group, `condition` is either "label," described above, or "no label," which was a control condition in which kids picked without hearing the term "glasses" at all. 
+
+```{r startmixed}
+d <- read.csv("../data/scales.csv")
+d$age.group <- factor(d$age.group)
+```
+
+Always begin with a histogram!
+
+```{r histagain}
+m.rt <- exp(mean(log(d$correct),na.rm=TRUE)) #take log average of RT: average natural logs of RTs, then take the exponential of that
+sd.rt <- exp(sd(log(d$correct),na.rm=TRUE)) #geometric standard deviation: exponentiated value of the standard deviation of the log-transformed values
+qplot(correct, data=d) + 
+  geom_vline(xintercept=m.rt + 2*sd.rt, col="red", lty=2) + #lets us view how much is spread 2 SDs above mean
+  geom_vline(xintercept=m.rt - 2*sd.rt, col="red", lty=2) + #lets us view how much is spread 2 SDs below mean
+  xlab("Children's Responses Correct") +
+  ylab("Frequency") +
+  ggtitle("Children's Responses Histogram (marking +/- 2 SDs)")
+```
+
+Brief Confidence Interval Digression
+------------------------------------
+
+Start out by setting up a function for a 95% CI using the normal approximation.
+
+```{r CIs}
+sem <- function(x) {sd(x)/sqrt(length(x))}
+ci95.norm <- function(x) {3.96*sem(x)}
+```
+
+But the number of participants in a group is likely to be < 30, so let's also compute this with a t distribution.
+
+```{r tdist}
+ci95.t <- function(x) {
+}
+```
+
+On the other hand, maybe we should use bootstrap CIs because these are actually  proportions, and the normal/t approximations don't know that they are 0/1 bounded.
+
+```{r bootstrapfun}
+library(boot)
+library(bootstrap)
+```
+
+Take a look at `?boot` and `?bootci`. Note that the syntax for the `boot` library is terrible, so we're going to use it to check some code that I use:
+
+```{r bootmeup}
+theta <- function(x,xdata,na.rm=T) {mean(xdata[x],na.rm=na.rm)}
+ci.low <- function(x,na.rm=T) {
+  mean(x,na.rm=na.rm) - 
+    quantile(bootstrap(1:length(x),
+                       10000,theta,x,na.rm=na.rm)$thetastar,.025,na.rm=na.rm)}
+ci.high <- function(x,na.rm=T) {
+  quantile(bootstrap(1:length(x),
+                     10000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - 
+    mean(x,na.rm=na.rm)}
+```
+
+Now make 95% confidence intervals across participants using all the methods above:
+
+- Normal
+- t
+- Bootstrap percentile using `boot.ci`
+- Bootstrap percentile using my code
+
+```{r redobootstrap}
+```
+
+Now plot the data by age and condition using `dplyr` and `ggplot2`. Plot some CIs on here - extra credit if you plot all of them and compare visually (you'll need `position = position_dodge()` or some other way to offset them).  
+
+```{r replot}
+```
+
+What do you conclude about confidence interval computation?
+
+Back to LMEMs
+-------------
+
+```{r mixedeffectsagain}
+library(lme4)
+```
+
+OK, now do a basic GLM over the entire data frame, using `age.group`, `condition`, and their interaction to predict correctness. (If we were focusing on developmental issues, I would ask you to think about how to model age here, but let's treat it as three discrete groups for now). 
+
+NOTE: this model is not appropriate, because it assumes that each subject's observations are independent from one another. It's still fine to do the analysis, though: it can tell you a lot about the data and is easy and fast to fit, as long as you know that you can't trust the p-values!
+
+```{r redomixed}
+fixed.glm <- glm(correct ~ age.group * condition, data=d, family="binomial")
+summary(fixed.glm)
+```
+
+Let's now use `dplyr` to get data frames for by-items (`msi`) and by-subjects (`mss`) analyses. `msi` should contain the mean ratings for every item and `mss` should contain the mean ratings for every subject.
+
+```{r dplyrmixed}
+msi <- d
+mss <- d
+msi <- msi %>% mutate(item_means = )
+```
+
+Now do standard linear models on each of these.
+
+NOTE: These are not strictly correct either because of the normal approximation on percent correct (model doesn't know it's 0 - 1 bounded and could give you standard error that goes above 1). Again, useful to do and see what happens.
+
+```{r linearmodelsagain}
+```
+
+Do ANOVA on these. Note that ANOVA doesn't let you figure out what is going on with individual levels of age.
+
+```{r anovas}
+```
+
+On to linear mixed effect models. Create the maximal random effects model a la Barr et al. (2013). Does it converge? If not, what will you do to make it converge? (The internet can be your friend here).
+
+HINT: try simplifying your model to a "semi-maximal" model. Bonus: try using a different fitting procedure on the maximal model.
+
+HINT: make sure that you consider which random effects are appropriate. Consider which observations are within/between subjects. E.g. having a random coefficient for age by subject doesn't make sense, because each subject has only one age.
+
+
+```{r mixedmaximal}
+```
+
+How do these coefficients compare with the independent coefficients linear model? What do you conclude?
+
+Which random effects make the most difference? Find out using `ranef`. Plot the random effects for subject and item.
+
+```{r plotrandom}
+```
+
+Make the minimal random effects model with just a subject intecept. How does this compare?
+
+```{r justsubjectintercept}
+```
+
+Get an estimate of the significance value for the coefficient on the `age*condition` interaction by using anova to compare between your semi-maximal model and the model without an intercept.
+
+```{r anovaformodels}
+```
