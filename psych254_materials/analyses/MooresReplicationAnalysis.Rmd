@@ -144,9 +144,11 @@ qplot(alternation, reliedOnSyntax, fill=valence, #plot bar graph with aggregated
   geom_text(aes(2.0,0.99,label="***"),colour="black",size=5) + 
   geom_text(aes(0.9,0.99,label="**"),colour="black",size=5) +
   geom_text(aes(1.45,0.99,label="n.s."),colour="black",size=5) +
+  geom_text(aes(3.1,0.77,label="n.s."),colour="black",size=5) +
   geom_text(aes(2.5,0.80,label="***"),colour="black",size=5) +
   geom_segment(aes(x=1.2, y=0.93, xend=1.7, yend=0.93)) +
-  geom_segment(aes(x=2.3, y=0.78, xend=2.7, yend=0.78))
+  geom_segment(aes(x=2.3, y=0.78, xend=2.7, yend=0.78)) +
+  geom_segment(aes(x=2.9, y=0.73, xend=3.3, yend=0.73))
 ```
 
 Mixed model analysis

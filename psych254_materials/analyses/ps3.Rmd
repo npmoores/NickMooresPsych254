@@ -1,7 +1,7 @@
 ---
 title: 'Psych 254 W15 PS #3'
-author: "Mike Frank"
-date: "February 22, 2015"
+author: "Nick Moores"
+date: "March 22, 2015"
 output: html_document
 ---
 
@@ -201,7 +201,7 @@ plot(predict(ints_lm, tooth.df))
 
 Now plot the residuals from the original model. How do they look?
 
-The residuals look quite messy.
+The residuals look quite messy; the fit is likely not good!
 
 HINT: `?resid`
 
@@ -218,7 +218,7 @@ HINT: `?qqplot` and `?qqnorm`
 ```{r qqplot}
 qqnorm(residuals)
 ```
-The residuals are somewhat normally distributed.
+The residuals are somewhat normally distributed, though non-parametric tests are likely more appropriate here.
 
 2B: Exploratory Linear Modeling
 -------------------------------
@@ -292,6 +292,7 @@ But the number of participants in a group is likely to be < 30, so let's also co
 
 ```{r tdist}
 ci95.t <- function(x) {
+  qt(0.975, df=(length(x)-1))*sem(x)
 }
 ```
 
@@ -314,6 +315,11 @@ ci.high <- function(x,na.rm=T) {
   quantile(bootstrap(1:length(x),
                      10000,theta,x,na.rm=na.rm)$thetastar,.975,na.rm=na.rm) - 
     mean(x,na.rm=na.rm)}
+
+d.correct <- d$correct
+the.means <- function(d.correct, i) {mean(d.correct[i])}
+results <- boot(data=d.correct, statistic=the.means, R=10000)
+bootci <- boot.ci(results, conf=0.95, type="bca")
 ```
 
 Now make 95% confidence intervals across participants using all the methods above:
@@ -324,14 +330,42 @@ Now make 95% confidence intervals across participants using all the methods abov
 - Bootstrap percentile using my code
 
 ```{r redobootstrap}
+rts <- aggregate(correct ~ condition + age.group, d, mean)
+rts.cinorm <- aggregate(correct ~ condition + age.group, d, ci95.norm)
+rts$cinorm <- rts.cinorm[,3]
+rts.cit <- aggregate(correct ~ condition + age.group, d, ci95.t)
+rts$cit <- rts.cit[,3]
+rts.cilow <- aggregate(correct ~ condition + age.group, d, ci.low)
+rts$cibootmikelow <- rts.cilow[,3]
+rts.cihigh <- aggregate(correct ~ condition + age.group, d, ci.high)
+rts$cibootmikehigh <- rts.cihigh[,3]
+rts$cibootrlow <- bootci$bca[4]
+rts$cibootrhigh <- bootci$bca[5]
+rts
 ```
 
 Now plot the data by age and condition using `dplyr` and `ggplot2`. Plot some CIs on here - extra credit if you plot all of them and compare visually (you'll need `position = position_dodge()` or some other way to offset them).  
 
 ```{r replot}
+plot.style <- theme(panel.grid.major=element_blank(), legend.position="right", plot.title=element_text(face="bold", size=14), axis.title=element_text(size=12))
+PD <- position_dodge(.9)
+qplot(age.group, correct, fill=condition, #plot bar graph with aggregated means dataframe
+      geom="bar",
+      position="dodge",
+      stat="identity",
+      data=rts) +
+      geom_errorbar(aes(ymin=correct-cinorm, ymax=correct+cinorm), position=PD, colour="green", width=.2) + geom_errorbar(aes(ymin=correct-cit, ymax=correct+cit), position=PD, colour="red", width=.2) + geom_errorbar(aes(ymin=correct-cibootmikelow, ymax=correct+cibootmikehigh), position=PD, colour="yellow", width=.2) +
+geom_errorbar(aes(ymin=bootci$bca[4], ymax=bootci$bca[5]), position=PD, colour="blue", width=.2) +
+      xlab("Subject Age") +
+      ylab("Proportion Correct (mean)") +
+      ggtitle("Proportion Correct by Trial Type and Age") +
+      scale_fill_discrete(name="Trial\nType") +
+      plot.style
 ```
 
 What do you conclude about confidence interval computation?
+
+I conclude that confidence interval computation that is based on either the t distribution (red CI bar) or on Mike's bootstrap code (yellow CI bar) is largely the same since the bootstrapping from this population yields a similar distribution to the t distribution. As we said, the Normal and t confidence intervals also don't know that they're zero-one bounded, which yields weird CI bars for the Normal computation. The blue CI bars represent the confidence interval for the grand mean proportion correct, although I wasn't clever enough to get it for each combination of age group and label condition.
 
 Back to LMEMs
 -------------
@@ -352,9 +386,8 @@ summary(fixed.glm)
 Let's now use `dplyr` to get data frames for by-items (`msi`) and by-subjects (`mss`) analyses. `msi` should contain the mean ratings for every item and `mss` should contain the mean ratings for every subject.
 
 ```{r dplyrmixed}
-msi <- d
-mss <- d
-msi <- msi %>% mutate(item_means = )
+msi <- d %>% group_by(subid) %>% mutate(item_mean = mean(correct))
+mss <- d %>% group_by(trial) %>% mutate(subject_mean = mean(correct))
 ```
 
 Now do standard linear models on each of these.
@@ -362,11 +395,17 @@ Now do standard linear models on each of these.
 NOTE: These are not strictly correct either because of the normal approximation on percent correct (model doesn't know it's 0 - 1 bounded and could give you standard error that goes above 1). Again, useful to do and see what happens.
 
 ```{r linearmodelsagain}
+msi.glm <- glm(correct ~ age.group * item_mean, data=msi, family="binomial")
+summary(msi.glm)
+
+mss.glm <- glm(correct ~ age.group * subject_mean, data=mss, family="binomial")
+summary(mss.glm)
 ```
 
 Do ANOVA on these. Note that ANOVA doesn't let you figure out what is going on with individual levels of age.
 
 ```{r anovas}
+anova(msi.glm, mss.glm)
 ```
 
 On to linear mixed effect models. Create the maximal random effects model a la Barr et al. (2013). Does it converge? If not, what will you do to make it converge? (The internet can be your friend here).
@@ -375,23 +414,57 @@ HINT: try simplifying your model to a "semi-maximal" model. Bonus: try using a d
 
 HINT: make sure that you consider which random effects are appropriate. Consider which observations are within/between subjects. E.g. having a random coefficient for age by subject doesn't make sense, because each subject has only one age.
 
+I now make the semi-maximal model that simplifies the random effect structure in order to converge.
 
 ```{r mixedmaximal}
+#does not converge!
+msi.mixed.model <- glmer(correct ~ age.group * condition + (1 + condition|subid) + (1 + age.group|trial), data=msi, family=binomial, na.action=na.omit) 
+summary(msi.mixed.model)
+
+#does not converge!
+mss.mixed.model <- glmer(correct ~ age.group * condition + (1 + condition|subid) + (1 + age.group|trial), data=mss, family=binomial, na.action=na.omit) 
+summary(mss.mixed.model)
+
+#does converge!
+msi.mixed.model <- glmer(correct ~ age.group * condition + (1|subid) + (1|trial), data=msi, family=binomial, na.action=na.omit) 
+summary(msi.mixed.model)
+
+#does converge!
+mss.mixed.model <- glmer(correct ~ age.group * condition + (1|subid) + (1|trial), data=mss, family=binomial, na.action=na.omit) 
+summary(mss.mixed.model)
+
+d.mixed.model <- glmer(correct ~ age.group * condition + (1|subid) + (1|trial), data=d, family=binomial, na.action=na.omit) 
+summary(d.mixed.model)
 ```
 
 How do these coefficients compare with the independent coefficients linear model? What do you conclude?
 
+The absolute value of the coefficients are closer to zero in these LMEM models than in the independent coefficients linear model, so I conclude that the mixed effects model is more appropriate as it accounts for more.
+
 Which random effects make the most difference? Find out using `ranef`. Plot the random effects for subject and item.
 
 ```{r plotrandom}
+random.effects <- ranef(d.mixed.model)
+plot(random.effects)
 ```
+
+The random subject intercept certainly makes the most difference.
 
 Make the minimal random effects model with just a subject intecept. How does this compare?
 
 ```{r justsubjectintercept}
+d.minimal.model <- glmer(correct ~ age.group * condition + (1|subid), data=d, family=binomial, na.action=na.omit) 
+summary(d.minimal.model)
+
+plot(ranef(d.minimal.model))
 ```
+
+The fit of the models with and without the random item intercept are almost identical! The random subject intercept certainly makes the most difference.
 
 Get an estimate of the significance value for the coefficient on the `age*condition` interaction by using anova to compare between your semi-maximal model and the model without an intercept.
 
 ```{r anovaformodels}
+anova(d.mixed.model, d.minimal.model)
 ```
+
+The semi-maximal model is marginally better (chi-squared = 3.48, df=1, p = 0.062), implying the interaction is likely marginally significant in actuality.
